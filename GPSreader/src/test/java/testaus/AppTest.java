@@ -1,4 +1,4 @@
-package gpsreader.gpsreader;
+package testaus;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
