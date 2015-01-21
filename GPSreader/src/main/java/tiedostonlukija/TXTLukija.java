@@ -42,8 +42,8 @@ public class TXTLukija {
                 lon.add(longitudi);
                 time.add(rivitaulukko[0]);
 
-                System.out.println(rivitaulukko[0] + ", " + rivitaulukko[1] + ", " + rivitaulukko[2] + ", " + rivitaulukko[3]
-                        + ", " + rivitaulukko[4] + ", " + rivitaulukko[5] + ", " + rivitaulukko[6]);
+//                System.out.println(rivitaulukko[0] + ", " + rivitaulukko[1] + ", " + rivitaulukko[2] + ", " + rivitaulukko[3]
+//                        + ", " + rivitaulukko[4] + ", " + rivitaulukko[5] + ", " + rivitaulukko[6]);
                 rivi = bufr.readLine();
             }
 
