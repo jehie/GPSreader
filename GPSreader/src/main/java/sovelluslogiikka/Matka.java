@@ -7,31 +7,45 @@ public class Matka {
     private ArrayList<Double> latitudi;
     private ArrayList<Double> longitudi;
     private ArrayList<String> aikaleima;
+
+    public ArrayList<Double> getLatitudi() {
+        return latitudi;
+    }
+
+    public ArrayList<Double> getLongitudi() {
+        return longitudi;
+    }
+
+    public ArrayList<String> getAikaleima() {
+        return aikaleima;
+    }
+
+    public ArrayList<Double> getMittauksentarkkuus() {
+        return mittauksentarkkuus;
+    }
+    private ArrayList<Double> mittauksentarkkuus;
     private String paiva;
     private Double kuljettumatka;
 
-    public Matka(ArrayList<Double> latitudi, ArrayList<Double> longitudi, ArrayList<String> aikaleima) {
+    public Matka(ArrayList<Double> latitudi, ArrayList<Double> longitudi, ArrayList<String> aikaleima, ArrayList<Double> tarkkuus) {
         this.latitudi = latitudi;
         this.longitudi = longitudi;
         this.aikaleima = aikaleima;
+        this.mittauksentarkkuus=tarkkuus;
         asetapaiva();
-        this.kuljettumatka=0.0;
+        this.kuljettumatka = 0.0;
+        laskeKuljettuMatka();
     }
-    public void laskeKuljettuMatka(){
-        
-        
-        System.out.println(latitudi.get(1));
-        System.out.println(latitudi.get(2));
-        System.out.println(longitudi.get(1));
-        System.out.println(longitudi.get(2));
-        System.out.println(laskeEtaisyys(latitudi.get(1), longitudi.get(1), latitudi.get(2), longitudi.get(2)));
-        
-        
-        for (int i = 0; i < latitudi.size()-1; i++) {
-           kuljettumatka+= laskeEtaisyys(latitudi.get(i), longitudi.get(i), latitudi.get(i+1), longitudi.get(i+1));
-            
+
+    public void laskeKuljettuMatka() {
+        kuljettumatka=0.0;
+
+
+        for (int i = 0; i < latitudi.size() - 1; i++) {
+            kuljettumatka += laskeEtaisyys(latitudi.get(i), longitudi.get(i), latitudi.get(i + 1), longitudi.get(i + 1));
+
         }
-        System.out.println(kuljettumatka);
+        
 
     }
 
@@ -58,10 +72,28 @@ public class Matka {
         return (maanHalkaisija * c);
     }
 //
+
+    public void poistaEpaTarkatMittaukset(int tarkkuus){
+        for (int i = 0; i < latitudi.size(); i++) {
+            double tark = mittauksentarkkuus.get(i);
+            if(tark>tarkkuus){
+                mittauksentarkkuus.remove(i);
+                latitudi.remove(i);
+                longitudi.remove(i);
+                aikaleima.remove(i);
+            }
+            
+        }
+        
+    }
     private void asetapaiva() {
         String aika = aikaleima.get(0);
         System.out.println("Ensimmäisen rivin aikaleima on: " + aika);
 
+    }
+
+    public Double getKuljettumatka() {
+        return kuljettumatka;
     }
 
 }

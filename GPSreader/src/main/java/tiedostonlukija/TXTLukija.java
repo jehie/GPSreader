@@ -15,9 +15,9 @@ public class TXTLukija {
     BufferedReader bufr;
     String erotin;
 
-    public TXTLukija(String tiedostopolku, String erotin) {
+    public TXTLukija(String tiedostopolku) {
         this.tiedostopolku = tiedostopolku;
-        this.erotin = erotin;
+        this.erotin = ",";
 
     }
 
@@ -25,6 +25,7 @@ public class TXTLukija {
         ArrayList<Double> lat = new ArrayList<Double>();
         ArrayList<Double> lon = new ArrayList<Double>();
         ArrayList<String> time = new ArrayList<String>();
+        ArrayList<Double> accuracy = new ArrayList<Double>();
 
         try {
             bufr = new BufferedReader(new FileReader(tiedostopolku));
@@ -40,10 +41,11 @@ public class TXTLukija {
                 lat.add(latitudi);
                 Double longitudi = Double.parseDouble(rivitaulukko[2]);
                 lon.add(longitudi);
-                time.add(rivitaulukko[0]);
 
-//                System.out.println(rivitaulukko[0] + ", " + rivitaulukko[1] + ", " + rivitaulukko[2] + ", " + rivitaulukko[3]
-//                        + ", " + rivitaulukko[4] + ", " + rivitaulukko[5] + ", " + rivitaulukko[6]);
+                time.add(rivitaulukko[0]);
+                Double acc = Double.parseDouble(rivitaulukko[4]);
+                accuracy.add(acc);
+
                 rivi = bufr.readLine();
             }
 
@@ -52,9 +54,9 @@ public class TXTLukija {
         } catch (IOException ex) {
             Logger.getLogger(TXTLukija.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Matka uusimatka = new Matka(lat, lon, time);
-        
+
+        Matka uusimatka = new Matka(lat, lon, time, accuracy);
+
         return uusimatka;
 
     }
