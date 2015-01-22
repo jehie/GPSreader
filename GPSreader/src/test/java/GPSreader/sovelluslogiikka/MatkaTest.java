@@ -1,20 +1,24 @@
-package testaus;
+package GPSreader.sovelluslogiikka;
 
+import GPSreader.tiedostonlukija.TXTRaakaLukija;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import sovelluslogiikka.Matka;
-import tiedostonlukija.TXTLukija;
+import org.junit.BeforeClass;
 
+/**
+ *
+ * @author Jesse
+ */
 public class MatkaTest {
-    TXTLukija lukija = new TXTLukija("20150118162507.txt");
-    Matka m;
-
+    
     public MatkaTest() {
     }
+    
+       TXTRaakaLukija lukija = new TXTRaakaLukija();
+    Matka m;
 
     @BeforeClass
     public static void setUpClass() {
@@ -28,41 +32,36 @@ public class MatkaTest {
     @Before
     public void setUp() {
 
-        
-        m = lukija.lue();
+        m = lukija.lue("20150118162507.txt");
     }
 
     @After
     public void tearDown() {
     }
 
+
+
     @Test
-    public void matkaLasketaan(){
-        m.laskeKuljettuMatka();
-        assertTrue(m.getKuljettumatka()>0);  
-    }
-    
-    @Test
-    public void PoistaEpatarkatMittauksetToimii(){
+    public void PoistaEpatarkatMittauksetToimii() {
         int mittauksiaEnnenPoistoa = m.getLatitudi().size();
-        
+
         //Aina mittauksia jotka huonompia kuin 10
         m.poistaEpaTarkatMittaukset(10);
-        
+
         int mittauksiaPoistonJalkeen = m.getLatitudi().size();
-        
-        assertTrue(mittauksiaEnnenPoistoa>mittauksiaPoistonJalkeen);
+
+        assertTrue(mittauksiaEnnenPoistoa > mittauksiaPoistonJalkeen);
     }
-    
+
     @Test
-    public void matkaLasketaanUudelleenMittaustenPoistonJalkeen(){
+    public void matkaLasketaanUudelleenMittaustenPoistonJalkeen() {
         m.laskeKuljettuMatka();
         double matkaAluksi = m.getKuljettumatka();
         m.poistaEpaTarkatMittaukset(10);
         m.laskeKuljettuMatka();
         double matkaLopuksi = m.getKuljettumatka();
-        
-        assertTrue(matkaAluksi>matkaLopuksi);
+
+        assertTrue(matkaAluksi > matkaLopuksi);
     }
     
 }
