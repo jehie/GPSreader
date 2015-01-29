@@ -55,10 +55,8 @@ public class MatkaTest {
 
     @Test
     public void matkaLasketaanUudelleenMittaustenPoistonJalkeen() {
-        m.laskeKuljettuMatka();
         double matkaAluksi = m.getKuljettumatka();
         m.poistaEpaTarkatMittaukset(10);
-        m.laskeKuljettuMatka();
         double matkaLopuksi = m.getKuljettumatka();
 
         assertTrue(matkaAluksi > matkaLopuksi);

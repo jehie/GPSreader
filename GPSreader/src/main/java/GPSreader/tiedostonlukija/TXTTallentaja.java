@@ -7,18 +7,20 @@ import java.util.logging.Logger;
 import GPSreader.sovelluslogiikka.Matka;
 
 
-//Tallentaa jo ohjelmaan tuodun Matka-olion tekstimuotoiseksi tiedostoksi. Muokattujen tiedostojen lukija puuttuu kuitenkin vielä. 
+//Tallentaa jo ohjelmaan tuodun Matka-olion tekstimuotoiseksi tiedostoksi.
 public class TXTTallentaja {
+    
+    
 
     public boolean kirjoitaMatkaTiedostoon(Matka talletettavaMatka) {
-        String nimi = talletettavaMatka.getPaiva();
+        String nimi = talletettavaMatka.getMatkanNimi();
         try {
             FileWriter kirjoittaja = new FileWriter("C:\\Users\\Jesse\\Documents\\Javalabra\\GPSreader\\GPSreader\\matkat\\"+nimi+".txt");
 
             for (int i = 0; i < talletettavaMatka.getLatitudi().size(); i++) {
                 String lat = Double.toString(talletettavaMatka.getLatitudi().get(i));
                 String lon = Double.toString(talletettavaMatka.getLongitudi().get(i));
-                String aika = talletettavaMatka.getAikaleima().get(i);
+                String aika = String.valueOf(talletettavaMatka.getAikaleima().get(i).getTime());
                 String tark = Double.toString(talletettavaMatka.getMittauksentarkkuus().get(i));
                 
                 kirjoittaja.write(lat + "," + lon + "," + aika + "," + tark);

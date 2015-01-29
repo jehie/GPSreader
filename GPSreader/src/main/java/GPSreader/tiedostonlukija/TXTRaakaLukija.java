@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import GPSreader.sovelluslogiikka.Matka;
+import java.sql.Time;
+import java.util.Date;
 
 //Lukee GPS Logger -android sovelluksesta saatavan tekstimuotoisen GPS-mittaus tiedoston.
 public class TXTRaakaLukija {
@@ -28,9 +30,29 @@ public class TXTRaakaLukija {
         if (rivi.equals("time,lat,lon,elevation,accuracy,bearing,speed")) {
             return true;
         }
-
         return false;
-
+    }
+    
+    //Muuttaa String-muotoisen tekstin Date-olioksi
+    public Date stringToTime(String time){
+        String vuosi = time.substring(0,4);
+        String kuukausi = time.substring(5,7);
+        String paiva = time.substring(8,10);
+        String tunnit = time.substring(11,13);
+        String minuutit = time.substring(14,16);
+        String sekuntit = time.substring(17,19);
+        
+        Date date = new Date();
+        date.setYear(Integer.parseInt(vuosi));
+        date.setMonth(Integer.parseInt(kuukausi));
+        date.setDate(Integer.parseInt(paiva));
+        date.setHours(Integer.parseInt(tunnit));
+        date.setMinutes(Integer.parseInt(minuutit));
+        date.setSeconds(Integer.parseInt(sekuntit));
+        
+ 
+        return date;
+        
     }
 
     //Lukee tiedoston sisään ja luo Matka olion ja palauttaa sen
@@ -38,7 +60,7 @@ public class TXTRaakaLukija {
 
         ArrayList<Double> lat = new ArrayList<Double>();
         ArrayList<Double> lon = new ArrayList<Double>();
-        ArrayList<String> time = new ArrayList<String>();
+        ArrayList<Date> time = new ArrayList<Date>();
         ArrayList<Double> accuracy = new ArrayList<Double>();
 
         try {
@@ -58,15 +80,15 @@ public class TXTRaakaLukija {
             }
 
             while (rivi != null) {
+                
 
                 String[] rivitaulukko = rivi.split(erotin);
-
                 Double latitudi = Double.parseDouble(rivitaulukko[1]);
                 lat.add(latitudi);
                 Double longitudi = Double.parseDouble(rivitaulukko[2]);
                 lon.add(longitudi);
 
-                time.add(rivitaulukko[0]);
+                time.add(stringToTime(rivitaulukko[0]));
                 Double acc = Double.parseDouble(rivitaulukko[4]);
                 accuracy.add(acc);
 
