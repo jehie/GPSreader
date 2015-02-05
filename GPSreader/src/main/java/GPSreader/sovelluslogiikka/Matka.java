@@ -3,8 +3,14 @@ package GPSreader.sovelluslogiikka;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Luokka sisältää kaikki yhteen Matkaan liittyvät muuttujat ja metodit Matkan
+ * ominaisuuksien laskemiseen.
+ */
 public class Matka {
+
     //Matkaan GPS-mittaukset
+
     private ArrayList<Double> latitudit;
     private ArrayList<Double> longitudit;
     private ArrayList<Date> aikaleimat;
@@ -12,6 +18,11 @@ public class Matka {
 
     //Lasketut muuttujat
     private String matkannimi;
+    private String vuosi;
+    private String kuukausi;
+    private String paiva;
+    private String kommentti;
+
     private Double kuljettumatka;
     private double kesto;
     private double keskinopeus;
@@ -19,16 +30,29 @@ public class Matka {
     //Luokat
     private MatkaLaskin matkalaskin;
 
+    /**
+     * Konstruktori Matka-luokalle
+     *
+     * @param latitudi Jokaisen mittauksen latitudit listana
+     * @param longitudi Jokaisen mittauksen longitudit listana
+     * @param aikaleima Jokaisen mittauksen aikaleimat listana
+     * @param tarkkuus GPS:n mittaustarkkuus listana
+     *
+     * 
+     */
     public Matka(ArrayList<Double> latitudi, ArrayList<Double> longitudi,
             ArrayList<Date> aikaleima, ArrayList<Double> tarkkuus) {
         this.latitudit = latitudi;
         this.longitudit = longitudi;
         this.aikaleimat = aikaleima;
         this.mittauksientarkkuudet = tarkkuus;
-        this.matkannimi = String.valueOf(aikaleima.get(0).getYear()) + "_"
-                + String.valueOf(aikaleima.get(0).getMonth() + "_"
-                        + String.valueOf(aikaleima.get(0).getDate() + "_"
-                                + String.valueOf(aikaleima.get(0).getHours())));
+        laskeMatkanNimi();
+
+        this.vuosi = String.valueOf(aikaleima.get(0).getYear());
+        this.kuukausi = String.valueOf(aikaleima.get(0).getMonth());
+        this.paiva = String.valueOf(aikaleima.get(0).getDay());
+        this.kommentti = "";
+
         this.kesto = 0.0;
         this.keskinopeus = 0.0;
 
@@ -36,7 +60,6 @@ public class Matka {
 
     }
 
-    
     //Kesken
 //    public void laskeMinimiJaMaksimiNopeudet() {
 //        for (int i = 0; i < latitudit.size() - 1; i++) {
@@ -46,8 +69,39 @@ public class Matka {
 //        }
 //
 //    }
+    
+     /**
+     * Muodostaa matkalle nimen aikaleiman perusteella
+     *
+     */
+    public void laskeMatkanNimi() {
+        this.matkannimi = String.valueOf(aikaleimat.get(0).getYear()) + "_"
+                + String.valueOf(aikaleimat.get(0).getMonth() + "_"
+                        + String.valueOf(aikaleimat.get(0).getDate() + "_"
+                                + String.valueOf(aikaleimat.get(0).getHours())));
 
-    //Laskee kuljetun matkan, hyödynten MatkaLaskin-luokkaa.
+    }
+    
+    /**
+     * Muuttaa matkan aikaleimat-muuttujan aikoja ja laskee nimen uudelleen
+     * 
+     * @param vuosi uusivuosi
+     * @param kuukausi uusikuukausi
+     * @param paiva uusipaiva
+     *
+     */
+
+    public void muutaAika(String vuosi, String kuukausi, String paiva) {
+        this.aikaleimat = matkalaskin.muutaVuosi(vuosi, kuukausi, paiva, aikaleimat);
+        laskeMatkanNimi();
+    }
+
+    
+     /**
+     * Laskee kuljetun matkan, hyödynten MatkaLaskin-luokkaa.
+     * 
+     *
+     */
     private void laskeKuljettuMatka() {
 
         this.kuljettumatka = 0.0;
@@ -58,8 +112,13 @@ public class Matka {
         }
 
     }
-
-    //Poistaa mittaukset joiden tarkkuus on huonompi kuin käyttäjän määrittelemä minimitarkkuus
+    
+    
+     /**
+     * Poistaa mittaukset joiden tarkkuus on huonompi kuin käyttäjän määrittelemä minimitarkkuus
+     * 
+     *@param tarkkuus tarkkuus jota suuremmat poistetaan
+     */
     public void poistaEpaTarkatMittaukset(int tarkkuus) {
         for (int i = latitudit.size() - 1; i >= 0; i--) {
             double tark = mittauksientarkkuudet.get(i);
@@ -99,10 +158,42 @@ public class Matka {
     }
 
     public double getKeskinopeus() {
-        return getKuljettumatka() / (getKesto()/60);
+        return getKuljettumatka() / (getKesto() / 60);
     }
 
     public ArrayList<Double> getMittauksentarkkuus() {
         return mittauksientarkkuudet;
+    }
+
+    public String getKommentti() {
+        return kommentti;
+    }
+
+    public void setKommentti(String kommentti) {
+        this.kommentti = kommentti;
+    }
+
+    public String getVuosi() {
+        return vuosi;
+    }
+
+    public void setVuosi(String vuosi) {
+        this.vuosi = vuosi;
+    }
+
+    public String getKuukausi() {
+        return kuukausi;
+    }
+
+    public void setKuukausi(String kuukausi) {
+        this.kuukausi = kuukausi;
+    }
+
+    public String getPaiva() {
+        return paiva;
+    }
+
+    public void setPaiva(String paiva) {
+        this.paiva = paiva;
     }
 }

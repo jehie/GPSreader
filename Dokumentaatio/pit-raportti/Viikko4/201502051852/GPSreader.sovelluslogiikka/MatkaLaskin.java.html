@@ -1,0 +1,1066 @@
+<html>
+<head>
+<style type='text/css'>
+html, body, div, span, p, blockquote, pre {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+body{
+	line-height: 1;
+	color: black;
+	background: white;
+	margin-left: 20px;
+}
+
+.src { 
+border: 1px solid #dddddd;
+padding-top: 10px;
+padding-right: 5px;
+padding-left: 5px;
+}
+
+
+.covered {background-color: #ddffdd}
+.uncovered {background-color: #ffdddd}
+.killed {background-color: #aaffaa}
+.survived {background-color: #ffaaaa}
+.uncertain {background-color: #dde7ef}
+.run_error {background-color: #dde7ef}
+.na {background-color: #eeeeee}
+.timed_out {background-color: #dde7ef}
+.non_viable {background-color: #aaffaa}
+.memory_error {background-color: #dde7ef}
+.not_started {background-color: #dde7ef; color : red}
+.no_coverage {background-color: #ffaaaa}
+
+</style>
+
+</head>
+<body>
+
+
+<h1>MatkaLaskin.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_1'/>
+1
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_1'></a>
+</td>
+<td class=''><pre><span  class=''>package GPSreader.sovelluslogiikka;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_2'/>
+2
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_2'></a>
+</td>
+<td class=''><pre><span  class=''>//Luokka johon tulee kaikki tarpeellinen laskenta mit&#195;&#164; Matka-luokalle tehd&#195;&#164;&#195;&#164;n</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_3'/>
+3
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_3'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_4'/>
+4
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_4'></a>
+</td>
+<td class=''><pre><span  class=''>import java.util.ArrayList;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_5'/>
+5
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_5'></a>
+</td>
+<td class=''><pre><span  class=''>import java.util.Date;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_6'/>
+6
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_6'></a>
+</td>
+<td class=''><pre><span  class=''>import java.util.concurrent.TimeUnit;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_7'/>
+7
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_7'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_8'/>
+8
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_8'></a>
+</td>
+<td class='covered'><pre><span  class=''>public class MatkaLaskin {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_9'/>
+9
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_9'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_10'/>
+10
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_10'></a>
+</td>
+<td class=''><pre><span  class=''>    public ArrayList&#60;Date&#62; muutaVuosi(String vuosi, String kuukausi, String paiva, ArrayList&#60;Date&#62; aikaleimat){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_11'/>
+11
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_11'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_12'/>
+12
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_12'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_13'/>
+13
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_13'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        for(Date a:aikaleimat){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_14'/>
+14
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_14'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>            a.setYear(Integer.valueOf(vuosi));</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_15'/>
+15
+</td>
+<td class='survived'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_15'>1</a>
+</td>
+<td class='covered'><pre><span  class='survived'>            a.setMonth(Integer.valueOf(kuukausi));</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_16'/>
+16
+</td>
+<td class='survived'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_16'>1</a>
+</td>
+<td class='covered'><pre><span  class='survived'>            a.setDate(Integer.valueOf(paiva));</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_17'/>
+17
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_17'></a>
+</td>
+<td class=''><pre><span  class=''>            </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_18'/>
+18
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_18'></a>
+</td>
+<td class='covered'><pre><span  class=''>        }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_19'/>
+19
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_19'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_20'/>
+20
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_20'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        return aikaleimat;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_21'/>
+21
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_21'></a>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_22'/>
+22
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_22'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_23'/>
+23
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_23'></a>
+</td>
+<td class=''><pre><span  class=''>    //Laskee et&#195;&#164;isyyden kahden koordinaatin v&#195;&#164;lill&#195;&#164;, k&#195;&#164;ytt&#195;&#164;en harersinen kaavaa.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_24'/>
+24
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_24'></a>
+</td>
+<td class=''><pre><span  class=''>    public double laskeEtaisyys(double alkuLat, double alkuLon,</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_25'/>
+25
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_25'></a>
+</td>
+<td class=''><pre><span  class=''>            double kohdeLat, double kohdeLon) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_26'/>
+26
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_26'></a>
+</td>
+<td class='covered'><pre><span  class=''>        double maanHalkaisija = 6371;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_27'/>
+27
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_27'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_28'/>
+28
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_28'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        double latEtaisyys = Math.toRadians(alkuLat - kohdeLat);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_29'/>
+29
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_29'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        double lonEtaisyys = Math.toRadians(alkuLon - kohdeLon);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_30'/>
+30
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_30'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_31'/>
+31
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_31'>3</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        double a = Math.sin(latEtaisyys / 2) * Math.sin(latEtaisyys / 2)</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_32'/>
+32
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_32'>2</a>
+</td>
+<td class='covered'><pre><span  class='killed'>                + Math.cos(Math.toRadians(alkuLat)) * Math.cos(Math.toRadians(kohdeLat))</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_33'/>
+33
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_33'>4</a>
+</td>
+<td class='covered'><pre><span  class='killed'>                * Math.sin(lonEtaisyys / 2) * Math.sin(lonEtaisyys / 2);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_34'/>
+34
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_34'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_35'/>
+35
+</td>
+<td class='survived'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_35'>2</a>
+</td>
+<td class='covered'><pre><span  class='survived'>        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_36'/>
+36
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_36'></a>
+</td>
+<td class=''><pre><span  class=''>        //palautus kilometrein&#195;&#164;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_37'/>
+37
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_37'>2</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        return (maanHalkaisija * c);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_38'/>
+38
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_38'></a>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_39'/>
+39
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_39'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_40'/>
+40
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_40'></a>
+</td>
+<td class=''><pre><span  class=''>    public double laskeMatkanKesto(ArrayList&#60;Date&#62; aikaleimat) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_41'/>
+41
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_41'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        if(aikaleimat==null){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_42'/>
+42
+</td>
+<td class='survived'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_42'>1</a>
+</td>
+<td class='uncovered'><pre><span  class='survived'>            return 0.0;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_43'/>
+43
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_43'></a>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_44'/>
+44
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_44'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_45'/>
+45
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_45'></a>
+</td>
+<td class='covered'><pre><span  class=''>        Double aika = 0.0;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_46'/>
+46
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_46'>4</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        for (int i = 0; i &#60; aikaleimat.size() - 1; i++) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_47'/>
+47
+</td>
+<td class='survived'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_47'>3</a>
+</td>
+<td class='covered'><pre><span  class='survived'>            aika += aikaleimat.get(i + 1).getTime() - aikaleimat.get(i).getTime();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_48'/>
+48
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_48'></a>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_49'/>
+49
+</td>
+<td class='survived'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_49'>2</a>
+</td>
+<td class='covered'><pre><span  class='survived'>        aika = aika / 1000 / 60;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_50'/>
+50
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_50'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        return aika;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_51'/>
+51
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_51'></a>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_52'/>
+52
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_52'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_53'/>
+53
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_53'></a>
+</td>
+<td class=''><pre><span  class=''>    public double laskeNopeus(Date aika1, Date aika2, double matka) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_54'/>
+54
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_54'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        double erotus = aika2.getTime() - aika1.getTime();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_55'/>
+55
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_55'>3</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        erotus=erotus/1000/60/60;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_56'/>
+56
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_56'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_57'/>
+57
+</td>
+<td class='survived'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_57'>2</a>
+</td>
+<td class='covered'><pre><span  class='survived'>        System.out.println(&#34;Nopeus on: &#34; +matka/erotus+&#34;km/min&#34;);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_58'/>
+58
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_58'>2</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        return matka/erotus;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_59'/>
+59
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_59'></a>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_60'/>
+60
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_60'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@32fdec40_61'/>
+61
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_61'></a>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_13'>13</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_13'/> 
+
+<p class='KILLED'>negated conditional : KILLED -> GPSreader.sovelluslogiikka.MatkaTest.GPSreader.sovelluslogiikka.MatkaTest</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_14'>14</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_14'/> 
+
+<p class='KILLED'>removed call to java/util/Date::setYear : KILLED -> GPSreader.sovelluslogiikka.MatkaTest.GPSreader.sovelluslogiikka.MatkaTest</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_15'>15</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_15'/> 
+
+<p class='SURVIVED'>removed call to java/util/Date::setMonth : SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_16'>16</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_16'/> 
+
+<p class='SURVIVED'>removed call to java/util/Date::setDate : SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_20'>20</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_20'/> 
+
+<p class='KILLED'>mutated return of Object value for GPSreader/sovelluslogiikka/MatkaLaskin::muutaVuosi to ( if (x != null) null else throw new RuntimeException ) : KILLED -> GPSreader.sovelluslogiikka.MatkaTest.GPSreader.sovelluslogiikka.MatkaTest</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_28'>28</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_28'/> 
+
+<p class='KILLED'>Replaced double subtraction with addition : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_29'>29</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_29'/> 
+
+<p class='KILLED'>Replaced double subtraction with addition : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_31'>31</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_31'/> 
+
+<p class='KILLED'>Replaced double division with multiplication : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>Replaced double division with multiplication : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>Replaced double multiplication with division : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.matkaLasketaan(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_32'>32</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_32'/> 
+
+<p class='KILLED'>Replaced double multiplication with division : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>Replaced double division with multiplication : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_33'>33</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_33'/> 
+
+<p class='KILLED'>Replaced double addition with subtraction : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.matkaLasketaan(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>Replaced double multiplication with division : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.matkaLasketaan(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>Replaced double multiplication with division : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.matkaLasketaan(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>Replaced double division with multiplication : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_35'>35</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_35'/> 
+
+<p class='SURVIVED'>Replaced double subtraction with addition : SURVIVED</p> <p class='KILLED'>Replaced double multiplication with division : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_37'>37</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_37'/> 
+
+<p class='KILLED'>Replaced double multiplication with division : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>replaced return of double value with -(x + 1) for GPSreader/sovelluslogiikka/MatkaLaskin::laskeEtaisyys : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.matkaLasketaan(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_41'>41</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_41'/> 
+
+<p class='KILLED'>negated conditional : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskekestoToimii(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_42'>42</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_42'/> 
+
+<p class='NO_COVERAGE'>replaced return of double value with -(x + 1) for GPSreader/sovelluslogiikka/MatkaLaskin::laskeMatkanKesto : NO_COVERAGE</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_46'>46</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_46'/> 
+
+<p class='KILLED'>negated conditional : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskekestoToimii(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>changed conditional boundary : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskekestoToimii(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>Replaced integer subtraction with addition : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskekestoToimii(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>Changed increment from 1 to -1 : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskekestoToimii(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_47'>47</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_47'/> 
+
+<p class='SURVIVED'>Replaced long subtraction with addition : SURVIVED</p> <p class='KILLED'>Replaced integer addition with subtraction : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskekestoToimii(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>Replaced double addition with subtraction : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskekestoToimii(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_49'>49</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_49'/> 
+
+<p class='SURVIVED'>Replaced double division with multiplication : SURVIVED</p> <p class='SURVIVED'>Replaced double division with multiplication : SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_50'>50</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_50'/> 
+
+<p class='KILLED'>replaced return of double value with -(x + 1) for GPSreader/sovelluslogiikka/MatkaLaskin::laskeMatkanKesto : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskekestoToimii(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_54'>54</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_54'/> 
+
+<p class='KILLED'>Replaced long subtraction with addition : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_55'>55</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_55'/> 
+
+<p class='KILLED'>Replaced double division with multiplication : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>Replaced double division with multiplication : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>Replaced double division with multiplication : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_57'>57</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_57'/> 
+
+<p class='SURVIVED'>removed call to java/io/PrintStream::println : SURVIVED</p> <p class='SURVIVED'>Replaced double division with multiplication : SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@32fdec40_58'>58</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@32fdec40_58'/> 
+
+<p class='KILLED'>Replaced double division with multiplication : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> <p class='KILLED'>replaced return of double value with -(x + 1) for GPSreader/sovelluslogiikka/MatkaLaskin::laskeNopeus : KILLED -> GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest)</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+
+<li class='mutator'>RETURN_VALS_MUTATOR</li>
+
+<li class='mutator'>MATH_MUTATOR</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>GPSreader.sovelluslogiikka.MatkaLaskinTest.laskeEtaisyysPalauttaaJotain(GPSreader.sovelluslogiikka.MatkaLaskinTest) (0 ms)</li><li>GPSreader.sovelluslogiikka.MatkaTest.GPSreader.sovelluslogiikka.MatkaTest (16 ms)</li><li>GPSreader.tiedostonlukija.TXTRaakaLukijaTest.MuuttujatEiOleNull(GPSreader.tiedostonlukija.TXTRaakaLukijaTest) (0 ms)</li><li>GPSreader.sovelluslogiikka.MatkaKokoelmaTest.matkojenSummaOnSuurempiKuinYhdenMatkanSumma(GPSreader.sovelluslogiikka.MatkaKokoelmaTest) (16 ms)</li><li>GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskekestoToimii(GPSreader.sovelluslogiikka.MatkaLaskinTest) (0 ms)</li><li>GPSreader.sovelluslogiikka.MatkaLaskinTest.LaskeNopeusToimiiOikein(GPSreader.sovelluslogiikka.MatkaLaskinTest) (15 ms)</li><li>GPSreader.sovelluslogiikka.MatkaLaskinTest.matkaLasketaan(GPSreader.sovelluslogiikka.MatkaLaskinTest) (0 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 0.30
+
+</body>
+</html>

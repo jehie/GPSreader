@@ -5,6 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Luokka testaa MatkaKokoelmat luokkaa
+ */
+
 public class MatkaKokoelmaTest {
     MatkaKokoelma mk;
     
@@ -21,6 +25,39 @@ public class MatkaKokoelmaTest {
     @Test
     public void matkojenSummaOnSuurempiKuinYhdenMatkanSumma() {
         assertTrue(mk.getMatkojenpituus()>mk.getMatkat().get(1).getKuljettumatka());
+    }
+    
+    @Test
+    public void PoistaMatkaNimellaPoistaa(){
+        int montaAlussa = mk.getMatkat().size();
+        String poistettava = mk.getMatkat().get(1).getMatkanNimi();
+        mk.poistaMatkaNimella(poistettava);
+        assertTrue(montaAlussa> mk.getMatkat().size());
+        
+    }
+    @Test
+    public void PalauttaaOikeanMatkan(){
+        Matka m = mk.getMatkat().get(1);
+        String etsi = m.getMatkanNimi();
+        
+        Matka em = mk.getMatkaNimella(etsi);
+        
+        assertTrue(em.getMatkanNimi().equals(etsi));
+    }
+    @Test
+    public void PoistaaEpatarkkatMittaukset(){
+        mk.PoistaEpaTarkatMittaukset(20);
+        
+        boolean onkoyli20 = false;
+        for(Matka m:mk.getMatkat()){
+            for(Double i:m.getMittauksentarkkuus()){
+                if(i>20.0){
+                    onkoyli20=true;
+                }
+            }
+        }
+        
+        assertEquals(false, onkoyli20);
     }
     
     @Test

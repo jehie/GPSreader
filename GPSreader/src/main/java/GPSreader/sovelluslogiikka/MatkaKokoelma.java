@@ -4,6 +4,9 @@ import GPSreader.tiedostonlukija.TXTTallentaja;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * MatkaKokoelma joka sisältää useita matkoja
+ */
 public class MatkaKokoelma {
 
     private ArrayList<Matka> matkat;
@@ -17,6 +20,38 @@ public class MatkaKokoelma {
         }
         laskeMatkojenKesto();
         return matkojenkesto;
+    }
+
+    /**
+     * Poistaa Matkan kokoelmasta nimen perusteella
+     *
+     * @param nimi Etsittävä nimi
+     */
+    public void poistaMatkaNimella(String nimi) {
+        int pois = -1;
+        for (int i = 0; i < matkat.size(); i++) {
+            if (nimi.equals(matkat.get(i).getMatkanNimi())) {
+                pois = i;
+            }
+        }
+
+        if (pois != -1) {
+            matkat.remove(pois);
+        }
+    }
+
+    /**
+     * Palauttaa Matkan kokoelmasta nimen perusteella
+     *
+     * @param nimi Etsittävä nimi
+     */
+    public Matka getMatkaNimella(String nimi) {
+        for (Matka m : matkat) {
+            if (m.getMatkanNimi().equals(nimi)) {
+                return m;
+            }
+        }
+        return null;
     }
 
     public MatkaKokoelma() {
@@ -38,6 +73,12 @@ public class MatkaKokoelma {
         return matkat;
     }
 
+    /**
+     * Poistaa mittaukset joiden tarkkuus on huonompi kuin käyttäjän
+     * määrittelemä minimitarkkuus
+     *
+     * @param tarkkuus tarkkuus jota suuremmat poistetaan
+     */
     public void PoistaEpaTarkatMittaukset(int tarkkuus) {
         for (Matka m : matkat) {
             m.poistaEpaTarkatMittaukset(tarkkuus);

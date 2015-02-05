@@ -8,10 +8,18 @@ import GPSreader.tiedostonlukija.TXTTallennettuLukija;
 import java.util.*;
 import GPSreader.tiedostonlukija.TXTTallentaja;
 import java.io.File;
+import javax.swing.SwingUtilities;
 
-public class kayttoliittyma {
+public class Tekstikayttoliittyma {
 
     public static void main(String[] args) throws Exception {
+        
+//        Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
+//        kayttoliittyma.run();
+      
+                
+                
+               
         Scanner lukija = new Scanner(System.in);
 
         kayttoliittyma(lukija);

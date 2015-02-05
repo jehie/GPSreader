@@ -61,5 +61,13 @@ public class MatkaTest {
 
         assertTrue(matkaAluksi > matkaLopuksi);
     }
+    @Test
+    public void muutaMatkanAikaaToimii(){
+       int vuosi =  m.getAikaleima().get(0).getYear();
+       m.muutaAika("2004", "1", "25");
+        int vuosi_muutettu = m.getAikaleima().get(0).getYear();
+        
+        assertTrue(vuosi_muutettu<vuosi);
+    }
     
 }
