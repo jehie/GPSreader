@@ -262,7 +262,8 @@ public class GUI extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String nimi = (String) jList2.getSelectedValue();
         Component parent = null;
-        if (nimi.equals(null)) {
+        System.out.println(nimi);
+        if (nimi==null) {
             JOptionPane.showMessageDialog(parent, "Valitse poistettava matka!");
         } else {
             matkakokoelma.poistaMatkaNimella(nimi);

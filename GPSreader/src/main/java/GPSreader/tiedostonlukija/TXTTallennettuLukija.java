@@ -12,6 +12,11 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+/**
+ * Lukee ohjelman avulla tallennetun tiedoston sisään ohjelmaan uudelleen.
+ * 
+ */
 public class TXTTallennettuLukija {
 
     File kansio = new File("C:\\Users\\Jesse\\Documents\\Javalabra\\GPSreader\\GPSreader\\matkat\\");

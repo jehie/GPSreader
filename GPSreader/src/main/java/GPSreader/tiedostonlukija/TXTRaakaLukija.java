@@ -11,7 +11,11 @@ import GPSreader.sovelluslogiikka.Matka;
 import java.sql.Time;
 import java.util.Date;
 
-//Lukee GPS Logger -android sovelluksesta saatavan tekstimuotoisen GPS-mittaus tiedoston.
+
+/**
+ * Lukee GPS Logger -android sovelluksesta saatavan tekstimuotoisen GPS-mittaus tiedoston.
+ * 
+ */
 public class TXTRaakaLukija {
 
     BufferedReader bufferoitulukija;

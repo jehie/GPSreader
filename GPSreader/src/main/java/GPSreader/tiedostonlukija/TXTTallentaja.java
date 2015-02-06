@@ -7,7 +7,10 @@ import java.util.logging.Logger;
 import GPSreader.sovelluslogiikka.Matka;
 
 
-//Tallentaa jo ohjelmaan tuodun Matka-olion tekstimuotoiseksi tiedostoksi.
+/**
+ * Tallentaa jo ohjelmaan tuodun Matka-olion tekstimuotoiseksi tiedostoksi.
+ * 
+ */
 public class TXTTallentaja {
     
     
