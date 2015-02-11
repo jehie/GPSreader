@@ -32,7 +32,6 @@ public class TXTTallennettuLukijaTest {
         Matka m = tl.lue("C:\\Users\\Jesse\\Documents\\Javalabra\\GPSreader\\GPSreader\\testimatkat\\2015_1_18_14.txt");
         assertTrue(m.getAikaleima().size()>5);
         
-
     }
     
 //    @Test

@@ -16,6 +16,7 @@ public class Matka {
     private ArrayList<Date> aikaleimat;
     private ArrayList<Double> mittauksientarkkuudet;
 
+
     //Lasketut muuttujat
     private String matkannimi;
     private String vuosi;

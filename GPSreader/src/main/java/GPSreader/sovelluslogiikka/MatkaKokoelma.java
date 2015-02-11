@@ -14,20 +14,12 @@ public class MatkaKokoelma {
     private TXTTallentaja tallentaja;
     private double matkojenkesto;
 
-    public double getMatkojenkesto() {
-        if (matkat.size() == 0) {
-            return 0.0;
-        }
-        laskeMatkojenKesto();
-        return matkojenkesto;
-    }
-
     /**
      * Poistaa Matkan kokoelmasta nimen perusteella
      *
      * @param nimi Etsittävä nimi
      */
-    public void poistaMatkaNimella(String nimi) {
+    public boolean poistaMatkaNimella(String nimi) {
         int pois = -1;
         for (int i = 0; i < matkat.size(); i++) {
             if (nimi.equals(matkat.get(i).getMatkanNimi())) {
@@ -37,7 +29,10 @@ public class MatkaKokoelma {
 
         if (pois != -1) {
             matkat.remove(pois);
+            return true;
         }
+
+        return false;
     }
 
     /**
@@ -94,6 +89,11 @@ public class MatkaKokoelma {
         }
     }
 
+    /**
+     * Palauttaa Matkakokoelmassa olevien matkojen keskinopeuden laskemalla sen
+     * matkojen yhteispituudesta ja yhteiskestosta
+     *
+     */
     public double getMatkojenKeskinopeus() {
         return getMatkojenpituus() / (getMatkojenkesto() / 60);
     }
@@ -107,12 +107,20 @@ public class MatkaKokoelma {
 
     }
 
+    /**
+     * Lisää Matka-olion kokoelmaan
+     *
+     */
     public void lisaaMatka(Matka matka) {
         matkat.add(matka);
     }
 
-    public Collection<Matka> haeMatkatPaivanPerusteella(String paiva) {
-        return null;
+    public double getMatkojenkesto() {
+        if (matkat.size() == 0) {
+            return 0.0;
+        }
+        laskeMatkojenKesto();
+        return matkojenkesto;
     }
 
 }

@@ -8,10 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 
-/**
- *
- * @author Jesse
- */
+
 public class MatkaTest {
     
     public MatkaTest() {
@@ -68,6 +65,26 @@ public class MatkaTest {
         int vuosi_muutettu = m.getAikaleima().get(0).getYear();
         
         assertTrue(vuosi_muutettu<vuosi);
+    }
+    
+    @Test
+    public void laskeMatkanNimiToimii(){
+        String nimi = m.getMatkanNimi();
+        m.muutaAika("2012","1","12");
+        m.laskeMatkanNimi();
+        String uusinimi = m.getMatkanNimi();
+        
+        assertFalse(nimi.equals(uusinimi));
+ 
+    }
+    
+    @Test
+    public void getKeskiNopeusToimii(){
+        double kn = m.getKeskinopeus();
+        
+        assertTrue(kn>3.0);
+        
+        
     }
     
 }

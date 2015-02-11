@@ -2,13 +2,23 @@ package kayttoliittyma;
 
 import GPSreader.sovelluslogiikka.Matka;
 import GPSreader.sovelluslogiikka.MatkaKokoelma;
+import GPSreader.sovelluslogiikka.MatkaLaskin;
+import GPSreader.sovelluslogiikka.Muuntaja;
+import GPSreader.sovelluslogiikka.Validoija;
 import GPSreader.tiedostonlukija.TXTRaakaLukija;
 import GPSreader.tiedostonlukija.TXTTallennettuLukija;
 import GPSreader.tiedostonlukija.TXTTallentaja;
 import java.awt.Component;
 import java.awt.List;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -18,42 +28,50 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GUI extends javax.swing.JFrame {
-
+    
     MatkaKokoelma matkakokoelma;
+    MatkaLaskin matkalaskin;
     DefaultListModel<String> malli;
+    TXTTallennettuLukija tl;
+    Validoija validoija;
+    Muuntaja muuntaja;
 
     /**
      * Creates new form GUI
      */
     public GUI() {
         luolista();
-
         initComponents();
-
+        
     }
-
+    
     private void luolista() {
         malli = new DefaultListModel<String>();
-        TXTTallennettuLukija tl = new TXTTallennettuLukija();
+        matkalaskin = new MatkaLaskin();
+        validoija = new Validoija();
+        muuntaja = new Muuntaja();
+        tl = new TXTTallennettuLukija();
         matkakokoelma = tl.lueKaikkiTallennetutTiedostot();
-
+        
         for (Matka m : matkakokoelma.getMatkat()) {
-
+            
             System.out.println(m.getMatkanNimi());
             malli.addElement(m.getMatkanNimi());
-
+            
         }
-
+        
     }
-
+    
     private void paivitalista() {
         malli = new DefaultListModel<String>();
+        
         for (Matka m : matkakokoelma.getMatkat()) {
-
+            
             System.out.println(m.getMatkanNimi());
             malli.addElement(m.getMatkanNimi());
-
+            
         }
+        jList2.setModel(malli);
     }
 
     /**
@@ -68,21 +86,34 @@ public class GUI extends javax.swing.JFrame {
         jFileChooser1 = new javax.swing.JFileChooser();
         scrollPane1 = new java.awt.ScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
+        choice1 = new java.awt.Choice();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+        jTextArea1.getAccessibleContext().setAccessibleName("tiedot");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jButton1.setText("Anna uusi tiedosto");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -120,52 +151,56 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Matkan tiedot"));
+        jPanel2.setPreferredSize(new java.awt.Dimension(400, 80));
 
-        jLabel2.setText("Vuosi");
-        jLabel2.setToolTipText("");
+        jLabel3.setText("Kuukausi:");
 
-        jLabel3.setText("Kuukausi");
+        jLabel4.setText("Päivä: ");
 
-        jLabel4.setText("Päivä");
+        jLabel5.setText("Kesto: ");
 
-        jLabel5.setText("Kesto");
+        jLabel6.setText("Pituus:");
 
-        jLabel6.setText("Pituus");
+        jLabel7.setText("Vuosi:");
+
+        jLabel8.setText("Keskinopeus: ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5))
-                .addGap(34, 34, 34)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4))
-                    .addComponent(jLabel6))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel8))
+                .addGap(44, 44, 44)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4))
+                .addGap(36, 36, 36))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(28, 28, 28)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addContainerGap(346, Short.MAX_VALUE))
+                    .addComponent(jLabel8)))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("GPSReader");
+        jLabel1.setText("ASDASD");
 
         jButton4.setText("Muokkaa");
         jButton4.setToolTipText("");
@@ -176,60 +211,88 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("Näytä kartalla");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 336, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 4, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton3)
                             .addComponent(jButton4))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
 
         JFileChooser tiedostonvalitsija = new JFileChooser();
         FileNameExtensionFilter filtteri = new FileNameExtensionFilter(".txt",
                 "txt");
         tiedostonvalitsija.setFileFilter(filtteri);
-
+        
         Component parent = null;
         int palautusarvo = tiedostonvalitsija.showOpenDialog(parent);
         if (palautusarvo == JFileChooser.APPROVE_OPTION) {
@@ -237,8 +300,10 @@ public class GUI extends javax.swing.JFrame {
                     + tiedostonvalitsija.getSelectedFile().getPath());
             TXTRaakaLukija txtrl = new TXTRaakaLukija();
             Matka uusimatka = txtrl.lue(tiedostonvalitsija.getSelectedFile().getPath());
+            matkakokoelma.lisaaMatka(uusimatka);
             TXTTallentaja tlt = new TXTTallentaja();
             tlt.kirjoitaMatkaTiedostoon(uusimatka);
+            paivitalista();
             JOptionPane.showMessageDialog(parent, "Tiedosto luettu ja"
                     + " tallennettu ohjelmaan!");
         }
@@ -246,7 +311,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Component parent = null;
-
+        
         String tarkkuus = JOptionPane.showInputDialog("Anna minimi tarkkuus", parent);
         int tarkkuusint = Integer.valueOf(tarkkuus);
         matkakokoelma.PoistaEpaTarkatMittaukset(tarkkuusint);
@@ -263,59 +328,103 @@ public class GUI extends javax.swing.JFrame {
         String nimi = (String) jList2.getSelectedValue();
         Component parent = null;
         System.out.println(nimi);
-        if (nimi==null) {
+        if (nimi == null) {
             JOptionPane.showMessageDialog(parent, "Valitse poistettava matka!");
         } else {
             matkakokoelma.poistaMatkaNimella(nimi);
-
+            
             paivitalista();
-            jList2.setModel(malli);
             JOptionPane.showMessageDialog(parent, "Matka poistettu!");
-
+            
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
+        String valittu = (String) jList2.getSelectedValue();
+        
+        jLabel7.setText("Vuosi: " + matkakokoelma.getMatkaNimella(valittu).getVuosi());
+        String kuukausi = muuntaja.matkanKuukausiTekstina(matkakokoelma.getMatkaNimella(valittu).getKuukausi());
+        jLabel3.setText("Kuukausi: " + kuukausi);
+        jLabel4.setText("Päivä: " + matkakokoelma.getMatkaNimella(valittu).getPaiva());
+        
+        String pituus = String.format("%.2f", matkakokoelma.getMatkaNimella(valittu).getKuljettumatka());
+        jLabel6.setText("Pituus: " + pituus + " km");
+        
+        String kesto = String.format("%.1f", matkakokoelma.getMatkaNimella(valittu).getKesto());
+        jLabel5.setText("Kesto: " +kesto +" min");
+        
+        String keskinopeus = String.format("%.1f", matkakokoelma.getMatkaNimella(valittu).getKeskinopeus());
+        jLabel8.setText("Keskinopeus: "+keskinopeus+"km/h");
+        
+        
+        
+//        //BufferedImage myPicture = ImageIO.read(new File("C:\\Users\\Jesse\\Documents\\Javalabra\\GPSreader\\GPSreader\\kartta.jpg"));
+//        ImageIcon ikoni = new ImageIcon("kartta.jpg");
+//        
+//        JLabel kuva = new JLabel(ikoni, JLabel.CENTER);
+//        
+//        jPanel1.add(kuva);
+//        jPanel1.revalidate();
+//        jPanel1.repaint();
+//        jPanel1.setVisible(true);
+        
 
     }//GEN-LAST:event_jList2MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         String valittu = (String) jList2.getSelectedValue();
-
-        JTextField vuosi = new JTextField(matkakokoelma.getMatkaNimella(valittu).getVuosi());
-
-        JTextField kuukausi = new JTextField(matkakokoelma.getMatkaNimella(valittu).getKuukausi());
-
-        JTextField paiva = new JTextField(matkakokoelma.getMatkaNimella(valittu).getPaiva());
-
-        Component parent = null;
-        JPanel paneeli = new JPanel();
-        paneeli.add(new JLabel("Vuosi:"));
-        paneeli.add(vuosi);
-
-        paneeli.add(new JLabel("Kuukausi: "));
-        paneeli.add(kuukausi);
-
-        paneeli.add(new JLabel("Paiva: "));
-        paneeli.add(paiva);
-        paneeli.add(Box.createVerticalStrut(15));
-
-        paneeli.add(new JLabel("Anna kommentti: "));
-
-        String kommentti = JOptionPane.showInputDialog(parent, paneeli, matkakokoelma.getMatkaNimella(valittu).getKommentti());
-        String uusivuosi = vuosi.getText();
-        String uusikuukausi = kuukausi.getText();
-        String uusipaiva = paiva.getText();
-        matkakokoelma.getMatkaNimella(valittu).setKommentti(kommentti);
-        matkakokoelma.getMatkaNimella(valittu).muutaAika(uusivuosi, uusikuukausi, uusipaiva);
-
-        paivitalista();
-        jList2.setModel(malli);
-
+        if (valittu == null) {
+            JOptionPane.showMessageDialog(null, "Valitse muokattava matka!");
+        } else {
+            
+            JTextField vuosi = new JTextField(matkakokoelma.getMatkaNimella(valittu).getVuosi());
+            
+            JTextField kuukausi = new JTextField(matkakokoelma.getMatkaNimella(valittu).getKuukausi());
+            
+            JTextField paiva = new JTextField(matkakokoelma.getMatkaNimella(valittu).getPaiva());
+            
+            Component parent = null;
+            JPanel paneeli = new JPanel();
+            paneeli.add(new JLabel("Vuosi:"));
+            paneeli.add(vuosi);
+            
+            paneeli.add(new JLabel("Kuukausi: "));
+            paneeli.add(kuukausi);
+            
+            paneeli.add(new JLabel("Paiva: "));
+            paneeli.add(paiva);
+            paneeli.add(Box.createVerticalStrut(15));
+            
+            paneeli.add(new JLabel("Anna kommentti: "));
+            
+            String kommentti = JOptionPane.showInputDialog(parent, paneeli, matkakokoelma.getMatkaNimella(valittu).getKommentti());
+            String uusivuosi = vuosi.getText();
+            String uusikuukausi = kuukausi.getText();
+            String uusipaiva = paiva.getText();
+            matkakokoelma.getMatkaNimella(valittu).setKommentti(kommentti);
+            matkakokoelma.getMatkaNimella(valittu).muutaAika(uusivuosi, uusikuukausi, uusipaiva);
+            
+            paivitalista();
+            jList2.setModel(malli);
+        }
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String valittu = (String) jList2.getSelectedValue();
+        double lat = matkakokoelma.getMatkaNimella(valittu).getLatitudi().get(0);
+        double lon = matkakokoelma.getMatkaNimella(valittu).getLongitudi().get(0);
+        
+        GoogleMaps gm = new GoogleMaps();
+        try {
+            gm.avaaKartta(lat, lon, "hybrid", 11);
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -349,21 +458,27 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Choice choice1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JList jList2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
     private java.awt.ScrollPane scrollPane1;
     // End of variables declaration//GEN-END:variables
 }

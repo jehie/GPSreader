@@ -1,6 +1,7 @@
 package GPSreader.tiedostonlukija;
 
 import GPSreader.sovelluslogiikka.Matka;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -27,6 +28,11 @@ public class TXTTallentajaTest {
     public void TallentajaPalauttaaTrueKunTiedostoKirjoitettu(){
         TXTTallentaja tal = new TXTTallentaja();
         boolean onnistuiko =  tal.kirjoitaMatkaTiedostoon(m);
+        
+        
+        File testitiedosto = new File("C:\\Users\\Jesse\\Documents\\Javalabra\\GPSreader\\GPSreader\\matkat\\2014_1_18_14.txt");
+        testitiedosto.delete();
+        
         
         assertTrue(onnistuiko);
         

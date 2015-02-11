@@ -28,13 +28,25 @@ public class MatkaKokoelmaTest {
     }
     
     @Test
-    public void PoistaMatkaNimellaPoistaa(){
+    public void PoistaMatkaNimellaPoistaaJosLöytyy(){
         int montaAlussa = mk.getMatkat().size();
-        String poistettava = mk.getMatkat().get(1).getMatkanNimi();
+        String poistettava = mk.getMatkat().get(0).getMatkanNimi();
         mk.poistaMatkaNimella(poistettava);
         assertTrue(montaAlussa> mk.getMatkat().size());
         
     }
+    
+    @Test
+    public void PoistaMatkaNimellaPalauttaaFalseJosEiLöydy(){
+        assertTrue(!mk.poistaMatkaNimella("testinimi")); 
+    }
+    
+        @Test
+    public void PoistaMatkaNimellaPalauttaaTrueJosLoytyy(){
+        assertTrue(mk.poistaMatkaNimella(mk.getMatkat().get(0).getMatkanNimi())); 
+    }
+    
+    
     @Test
     public void PalauttaaOikeanMatkan(){
         Matka m = mk.getMatkat().get(1);
@@ -43,6 +55,13 @@ public class MatkaKokoelmaTest {
         Matka em = mk.getMatkaNimella(etsi);
         
         assertTrue(em.getMatkanNimi().equals(etsi));
+    }
+    
+    @Test
+    public void PalauttaaNullJosEiLöydyMatkaa(){
+        Matka etsittava = mk.getMatkaNimella("EiLoydyTataNimea");
+        
+        assertTrue(etsittava==null);
     }
     @Test
     public void PoistaaEpatarkkatMittaukset(){
@@ -72,6 +91,12 @@ public class MatkaKokoelmaTest {
         MatkaKokoelma mk2 = new MatkaKokoelma();
         String tulos = String.valueOf(mk2.getMatkojenkesto());
         assertEquals(tulos, "0.0");
+    }
+    
+    @Test
+    public void matkojenKeskiNopeusOnJarkeva(){
+        double kn = mk.getMatkojenKeskinopeus();
+        assertTrue(kn>3.0);
     }
     
 }

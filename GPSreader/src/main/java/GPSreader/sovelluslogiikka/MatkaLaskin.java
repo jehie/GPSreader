@@ -65,6 +65,7 @@ public class MatkaLaskin {
         return aika;
     }
 
+
     /**
      * Laskee mikä oli kahden edellisen mittauksen nopeus
      *

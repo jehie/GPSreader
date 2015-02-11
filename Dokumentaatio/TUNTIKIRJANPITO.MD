@@ -10,3 +10,7 @@
 *01.2.2015 - 3h - Visuaalisen käyttöliittymän aloittaminen
 *02.2.2015 - 3h - Visuaalisen käyttöliittymän jatkaminen, tiedoston antaminen tiedostonhallinnan kautta jne.
 *05.2.2015 - 4h - Matkojen poisto,  matkojen editoimismahdollisuuden lisääminen
+*08.2.2015 - 4h - Google Maps Rajapinnan mukaan tuominen, karttojen noutaminen ja esittäminen JFRAME:ssa
+*09.2.2015 - 3h - Google Maps osoitteiden muokkaaminen matkojen sijainnin perusteella, käyttöliittymän päivättämistä
+*10.2.2015 - 3h - Graafisen käyttöliittymän muokkausta, Validoija-luokan tekeminen
+*11.2.2015 - 3h - Muuntaja-luokan tekeminen, sekvenssikaaviot ja päivitetty luokkakaavio
