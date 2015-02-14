@@ -90,7 +90,7 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        PoistaEpaTarkatButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();
         jButton3 = new javax.swing.JButton();
@@ -122,10 +122,10 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("<html>\nPoista epätarkat <p>\nmittaukset");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        PoistaEpaTarkatButton.setText("<html>\nPoista epätarkat <p>\nmittaukset");
+        PoistaEpaTarkatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                PoistaEpaTarkatButtonActionPerformed(evt);
             }
         });
 
@@ -239,7 +239,7 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PoistaEpaTarkatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -277,7 +277,7 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(jButton4))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(PoistaEpaTarkatButton, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -309,7 +309,7 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void PoistaEpaTarkatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PoistaEpaTarkatButtonActionPerformed
         Component parent = null;
         
         String tarkkuus = JOptionPane.showInputDialog("Anna minimi tarkkuus", parent);
@@ -318,7 +318,7 @@ public class GUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(parent, "Epätarkat mittaukset poistettu!");
         System.out.println(tarkkuus);
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_PoistaEpaTarkatButtonActionPerformed
 
     private void jList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList2ValueChanged
 
@@ -458,9 +458,9 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton PoistaEpaTarkatButton;
     private java.awt.Choice choice1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

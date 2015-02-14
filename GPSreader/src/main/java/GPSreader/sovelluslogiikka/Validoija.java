@@ -83,5 +83,9 @@ public class Validoija {
         }
         return false;
     }
+    
+    public boolean validoiOnkoInputInteger(String input){
+        
+    }
 
 }
