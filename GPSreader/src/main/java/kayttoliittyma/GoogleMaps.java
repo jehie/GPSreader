@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -14,9 +15,13 @@ import javax.swing.JLabel;
 public class GoogleMaps {
 
 
-    public void avaaKartta(double lat, double lon, String kuvatyyppi, int zoom) throws IOException {
+    public void avaaKartta(String osoite) throws IOException {
         GoogleMapsOsoitteenRakentaja gmor = new GoogleMapsOsoitteenRakentaja();
-        String osoite = gmor.rakennaOsoite(lat, lon, kuvatyyppi, zoom);
+        //String osoite = gmor.rakennaOsoite(lat, lon, kuvatyyppi, zoom);
+        //String osoite = gmor.rakennaOsoiteMarkereilla(lat, lon, lat, lon, kuvatyyppi, zoom);
+        //String osoite = gmor.rakennaOsoitePolulla(latitudit, longitudit, kuvatyyppi, zoom);
+        
+        
         System.out.println(osoite);
 
         JFrame freimi = new JFrame("Google Maps");

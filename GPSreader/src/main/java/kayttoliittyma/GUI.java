@@ -1,5 +1,6 @@
 package kayttoliittyma;
 
+import GPSreader.sovelluslogiikka.GoogleMapsOsoitteenRakentaja;
 import GPSreader.sovelluslogiikka.Matka;
 import GPSreader.sovelluslogiikka.MatkaKokoelma;
 import GPSreader.sovelluslogiikka.MatkaLaskin;
@@ -28,13 +29,15 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GUI extends javax.swing.JFrame {
-    
+
     MatkaKokoelma matkakokoelma;
     MatkaLaskin matkalaskin;
     DefaultListModel<String> malli;
+    GoogleMapsOsoitteenRakentaja gmor;
     TXTTallennettuLukija tl;
     Validoija validoija;
     Muuntaja muuntaja;
+    Ilmoittaja ilmoittaja = new Ilmoittaja();
 
     /**
      * Creates new form GUI
@@ -42,36 +45,48 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         luolista();
         initComponents();
-        
+        luoMatkojenTiedot();
+
     }
-    
+
     private void luolista() {
         malli = new DefaultListModel<String>();
         matkalaskin = new MatkaLaskin();
         validoija = new Validoija();
         muuntaja = new Muuntaja();
+        gmor = new GoogleMapsOsoitteenRakentaja();
         tl = new TXTTallennettuLukija();
         matkakokoelma = tl.lueKaikkiTallennetutTiedostot();
-        
+
         for (Matka m : matkakokoelma.getMatkat()) {
-            
             System.out.println(m.getMatkanNimi());
             malli.addElement(m.getMatkanNimi());
-            
         }
-        
+
     }
-    
+
     private void paivitalista() {
         malli = new DefaultListModel<String>();
-        
+
         for (Matka m : matkakokoelma.getMatkat()) {
-            
+
             System.out.println(m.getMatkanNimi());
             malli.addElement(m.getMatkanNimi());
-            
+
         }
         jList2.setModel(malli);
+    }
+
+    private void luoMatkojenTiedot() {
+        String pituus = String.format("%.2f", matkakokoelma.getMatkojenpituus());
+        jLabel12.setText("Pituus " + pituus + " km");
+
+        String keskinopeus = String.format("%.2f", matkakokoelma.getMatkojenKeskinopeus());
+        jLabel14.setText("Keskinopeus: " + keskinopeus + " km/h");
+
+        String kesto = String.format("%.2f", matkakokoelma.getMatkojenkesto());
+        jLabel11.setText("Kesto: " + kesto + " min");
+
     }
 
     /**
@@ -89,6 +104,7 @@ public class GUI extends javax.swing.JFrame {
         choice1 = new java.awt.Choice();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
         PoistaEpaTarkatButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -101,10 +117,14 @@ public class GUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
@@ -112,8 +132,11 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
         jTextArea1.getAccessibleContext().setAccessibleName("tiedot");
 
+        jToggleButton1.setText("jToggleButton1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(560, 317));
 
         jButton1.setText("Anna uusi tiedosto");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +145,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        PoistaEpaTarkatButton.setText("<html>\nPoista epätarkat <p>\nmittaukset");
+        PoistaEpaTarkatButton.setText("Minimitarkkuus");
         PoistaEpaTarkatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PoistaEpaTarkatButtonActionPerformed(evt);
@@ -160,9 +183,9 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel5.setText("Kesto: ");
 
-        jLabel6.setText("Pituus:");
+        jLabel6.setText("Pituus:          ");
 
-        jLabel7.setText("Vuosi:");
+        jLabel7.setText("Vuosi:       ");
 
         jLabel8.setText("Keskinopeus: ");
 
@@ -173,17 +196,20 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6))
+                .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel8))
-                .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4))
-                .addGap(36, 36, 36))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,9 +224,6 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel8)))
         );
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("ASDASD");
 
         jButton4.setText("Muokkaa");
         jButton4.setToolTipText("");
@@ -218,17 +241,51 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton6.setText("Alku");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        jButton7.setText("Loppu");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Kaikkien matkojen tiedot"));
+        jPanel3.setMaximumSize(new java.awt.Dimension(400, 80));
+        jPanel3.setPreferredSize(new java.awt.Dimension(400, 80));
+
+        jLabel11.setText("Kesto: ");
+
+        jLabel12.setText("Pituus:");
+
+        jLabel14.setText("Keskinopeus: ");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel14)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 336, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel11))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,51 +294,69 @@ public class GUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(PoistaEpaTarkatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 4, Short.MAX_VALUE))
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3))
+                    .addComponent(PoistaEpaTarkatButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                                .addGap(2, 2, 2)
+                                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton6, jButton7});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton3, jButton4});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton7))
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PoistaEpaTarkatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PoistaEpaTarkatButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButton4)
+                            .addComponent(jButton3)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton6, jButton7});
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton3, jButton4});
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {PoistaEpaTarkatButton, jButton1});
+
+        jPanel3.getAccessibleContext().setAccessibleName("Kaikkien matkojen tiedot");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -292,7 +367,7 @@ public class GUI extends javax.swing.JFrame {
         FileNameExtensionFilter filtteri = new FileNameExtensionFilter(".txt",
                 "txt");
         tiedostonvalitsija.setFileFilter(filtteri);
-        
+
         Component parent = null;
         int palautusarvo = tiedostonvalitsija.showOpenDialog(parent);
         if (palautusarvo == JFileChooser.APPROVE_OPTION) {
@@ -304,19 +379,27 @@ public class GUI extends javax.swing.JFrame {
             TXTTallentaja tlt = new TXTTallentaja();
             tlt.kirjoitaMatkaTiedostoon(uusimatka);
             paivitalista();
-            JOptionPane.showMessageDialog(parent, "Tiedosto luettu ja"
-                    + " tallennettu ohjelmaan!");
+
+            JOptionPane.showMessageDialog(parent, "Tiedosto luettu ja" + " tallennettu ohjelmaan!");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void PoistaEpaTarkatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PoistaEpaTarkatButtonActionPerformed
         Component parent = null;
-        
+
         String tarkkuus = JOptionPane.showInputDialog("Anna minimi tarkkuus", parent);
-        int tarkkuusint = Integer.valueOf(tarkkuus);
-        matkakokoelma.PoistaEpaTarkatMittaukset(tarkkuusint);
-        JOptionPane.showMessageDialog(parent, "Epätarkat mittaukset poistettu!");
-        System.out.println(tarkkuus);
+        if (!validoija.validoiOnkoInputInteger(tarkkuus)) {
+            ilmoittaja.ilmoita("Antamasi syöte (" + tarkkuus + ") on virheellinen");
+        } else {
+            int tarkkuusint = Integer.valueOf(tarkkuus);
+            matkakokoelma.PoistaEpaTarkatMittaukset(tarkkuusint);
+
+            ilmoittaja.ilmoita("Epätarkat mittaukset poistettu!");
+            //JOptionPane.showMessageDialog(parent, "Epätarkat mittaukset poistettu!");
+            System.out.println(tarkkuus);
+
+        }
+
 
     }//GEN-LAST:event_PoistaEpaTarkatButtonActionPerformed
 
@@ -332,33 +415,31 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(parent, "Valitse poistettava matka!");
         } else {
             matkakokoelma.poistaMatkaNimella(nimi);
-            
+
             paivitalista();
             JOptionPane.showMessageDialog(parent, "Matka poistettu!");
-            
+
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
         String valittu = (String) jList2.getSelectedValue();
-        
+
         jLabel7.setText("Vuosi: " + matkakokoelma.getMatkaNimella(valittu).getVuosi());
         String kuukausi = muuntaja.matkanKuukausiTekstina(matkakokoelma.getMatkaNimella(valittu).getKuukausi());
         jLabel3.setText("Kuukausi: " + kuukausi);
         jLabel4.setText("Päivä: " + matkakokoelma.getMatkaNimella(valittu).getPaiva());
-        
+
         String pituus = String.format("%.2f", matkakokoelma.getMatkaNimella(valittu).getKuljettumatka());
         jLabel6.setText("Pituus: " + pituus + " km");
-        
+
         String kesto = String.format("%.1f", matkakokoelma.getMatkaNimella(valittu).getKesto());
-        jLabel5.setText("Kesto: " +kesto +" min");
-        
+        jLabel5.setText("Kesto: " + kesto + " min");
+
         String keskinopeus = String.format("%.1f", matkakokoelma.getMatkaNimella(valittu).getKeskinopeus());
-        jLabel8.setText("Keskinopeus: "+keskinopeus+"km/h");
-        
-        
-        
+        jLabel8.setText("Keskinopeus: " + keskinopeus + "km/h");
+
 //        //BufferedImage myPicture = ImageIO.read(new File("C:\\Users\\Jesse\\Documents\\Javalabra\\GPSreader\\GPSreader\\kartta.jpg"));
 //        ImageIcon ikoni = new ImageIcon("kartta.jpg");
 //        
@@ -368,7 +449,6 @@ public class GUI extends javax.swing.JFrame {
 //        jPanel1.revalidate();
 //        jPanel1.repaint();
 //        jPanel1.setVisible(true);
-        
 
     }//GEN-LAST:event_jList2MouseClicked
 
@@ -377,34 +457,34 @@ public class GUI extends javax.swing.JFrame {
         if (valittu == null) {
             JOptionPane.showMessageDialog(null, "Valitse muokattava matka!");
         } else {
-            
+
             JTextField vuosi = new JTextField(matkakokoelma.getMatkaNimella(valittu).getVuosi());
-            
+
             JTextField kuukausi = new JTextField(matkakokoelma.getMatkaNimella(valittu).getKuukausi());
-            
+
             JTextField paiva = new JTextField(matkakokoelma.getMatkaNimella(valittu).getPaiva());
-            
+
             Component parent = null;
             JPanel paneeli = new JPanel();
             paneeli.add(new JLabel("Vuosi:"));
             paneeli.add(vuosi);
-            
+
             paneeli.add(new JLabel("Kuukausi: "));
             paneeli.add(kuukausi);
-            
+
             paneeli.add(new JLabel("Paiva: "));
             paneeli.add(paiva);
             paneeli.add(Box.createVerticalStrut(15));
-            
+
             paneeli.add(new JLabel("Anna kommentti: "));
-            
+
             String kommentti = JOptionPane.showInputDialog(parent, paneeli, matkakokoelma.getMatkaNimella(valittu).getKommentti());
             String uusivuosi = vuosi.getText();
             String uusikuukausi = kuukausi.getText();
             String uusipaiva = paiva.getText();
             matkakokoelma.getMatkaNimella(valittu).setKommentti(kommentti);
             matkakokoelma.getMatkaNimella(valittu).muutaAika(uusivuosi, uusikuukausi, uusipaiva);
-            
+
             paivitalista();
             jList2.setModel(malli);
         }
@@ -413,18 +493,60 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         String valittu = (String) jList2.getSelectedValue();
-        double lat = matkakokoelma.getMatkaNimella(valittu).getLatitudi().get(0);
-        double lon = matkakokoelma.getMatkaNimella(valittu).getLongitudi().get(0);
-        
-        GoogleMaps gm = new GoogleMaps();
-        try {
-            gm.avaaKartta(lat, lon, "hybrid", 11);
-        } catch (IOException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        if (valittu == null) {
+            JOptionPane.showMessageDialog(null, "Valitse näytettävä matka!");
+        } else {
+
+            int koko = matkakokoelma.getMatkaNimella(valittu).getLatitudi().size();
+            String osoite = gmor.rakennaOsoitePolulla(matkakokoelma.getMatkaNimella(valittu).getLatitudi(), matkakokoelma.getMatkaNimella(valittu).getLongitudi(), "hybrid");
+
+            GoogleMaps gm = new GoogleMaps();
+            try {
+                gm.avaaKartta(osoite);
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }//GEN-LAST:event_jButton5ActionPerformed
-    
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        String valittu = (String) jList2.getSelectedValue();
+        if (valittu == null) {
+            JOptionPane.showMessageDialog(null, "Valitse näytettävä matka!");
+        } else {
+            double lat = matkakokoelma.getMatkaNimella(valittu).getLatitudi().get(0);
+            double lon = matkakokoelma.getMatkaNimella(valittu).getLongitudi().get(0);
+            String osoite = gmor.rakennaOsoiteMarkereilla(lat, lon, "satellite", 18);
+
+            GoogleMaps gm = new GoogleMaps();
+            try {
+                gm.avaaKartta(osoite);
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        String valittu = (String) jList2.getSelectedValue();
+        if (valittu == null) {
+            JOptionPane.showMessageDialog(null, "Valitse näytettävä matka!");
+        } else {
+            int koko = matkakokoelma.getMatkaNimella(valittu).getLatitudi().size() - 1;
+            double lat = matkakokoelma.getMatkaNimella(valittu).getLatitudi().get(koko);
+            double lon = matkakokoelma.getMatkaNimella(valittu).getLongitudi().get(koko);
+            String osoite = gmor.rakennaOsoiteMarkereilla(lat, lon, "satellite", 18);
+
+            GoogleMaps gm = new GoogleMaps();
+            try {
+                gm.avaaKartta(osoite);
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -464,8 +586,12 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -473,12 +599,13 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JList jList2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JToggleButton jToggleButton1;
     private java.awt.ScrollPane scrollPane1;
     // End of variables declaration//GEN-END:variables
 }
