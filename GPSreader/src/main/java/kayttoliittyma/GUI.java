@@ -413,6 +413,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String nimi = (String) jList2.getSelectedValue();
+        System.out.println(nimi+" aaaaaa");
         Component parent = null;
         System.out.println(nimi);
         if (nimi == null) {
@@ -422,8 +423,25 @@ public class GUI extends javax.swing.JFrame {
 
             paivitalista();
             JOptionPane.showMessageDialog(parent, "Matka poistettu!");
-
+            paivitaMatkojenTiedot();
+            
         }
+        
+        try{
+ 
+    		File file = new File("c:\\logfile20100131.log");
+ 
+    		if(file.delete()){
+    			System.out.println(file.getName() + " is deleted!");
+    		}else{
+    			System.out.println("Delete operation is failed.");
+    		}
+ 
+    	}catch(Exception e){
+ 
+    		e.printStackTrace();
+ 
+    	}
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
