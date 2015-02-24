@@ -513,7 +513,7 @@ public class GUI extends javax.swing.JFrame {
         } else {
             double lat = matkakokoelma.getMatkaNimella(valittu).getLatitudi().get(0);
             double lon = matkakokoelma.getMatkaNimella(valittu).getLongitudi().get(0);
-            String osoite = gmor.rakennaOsoiteMarkereilla(lat, lon, "roadmap", 18);
+            String osoite = gmor.rakennaOsoiteMarkereilla(lat, lon, "roadmap", 16);
 
             GoogleMaps gm = new GoogleMaps();
             try {
@@ -532,7 +532,7 @@ public class GUI extends javax.swing.JFrame {
             int koko = matkakokoelma.getMatkaNimella(valittu).getLatitudi().size() - 1;
             double lat = matkakokoelma.getMatkaNimella(valittu).getLatitudi().get(koko);
             double lon = matkakokoelma.getMatkaNimella(valittu).getLongitudi().get(koko);
-            String osoite = gmor.rakennaOsoiteMarkereilla(lat, lon, "roadmap", 18);
+            String osoite = gmor.rakennaOsoiteMarkereilla(lat, lon, "roadmap", 16);
 
             GoogleMaps gm = new GoogleMaps();
             try {
