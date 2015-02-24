@@ -30,8 +30,8 @@ public class MatkaLaskinTest {
     @Before
     public void setUp() {
         ml=new MatkaLaskin();
-        m = lukija.lue("20150118162507.txt");
-        m2= tlukija.lue("C:\\Users\\Jesse\\Documents\\Javalabra\\GPSreader\\GPSreader\\testimatkat\\2015_1_18_14.txt");
+        m = lukija.lue("testimatkat\\20150118162507.txt");
+        m2= tlukija.lue("testimatkat\\2015_1_18_14.txt");
     }
 
     @Test

@@ -27,7 +27,7 @@ public class TXTRaakaLukijaTest {
     @Test
     public void TiedostoLuetaanOikeinSisaanOlemassaOlevallaTiedostolla() {
         
-        Matka m = lukija.lue("20150118162507.txt");
+        Matka m = lukija.lue("testimatkat\\20150118162507.txt");
         assertNotNull(m);
 
     }

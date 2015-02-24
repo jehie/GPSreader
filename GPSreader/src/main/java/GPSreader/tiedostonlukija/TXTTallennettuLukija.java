@@ -11,21 +11,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import kayttoliittyma.Ilmoittaja;
 
 /**
  * Lukee ohjelman avulla tallennetun tiedoston sisään ohjelmaan uudelleen.
- * 
+ *
  */
 public class TXTTallennettuLukija {
-
-    File kansio = new File("C:\\Users\\Jesse\\Documents\\Javalabra\\GPSreader\\GPSreader\\matkat\\");
+    Ilmoittaja ilmoittaja = new Ilmoittaja();
+    File kansio = new File("matkat\\");
 
     //Lukee kaikki kansiossa olevat TXTTallentajalla tallennetut tiedostot
     public MatkaKokoelma lueKaikkiTallennetutTiedostot() {
         MatkaKokoelma mko = new MatkaKokoelma();
-        System.out.println("");
-        System.out.println("Luetut tiedostot: ");
         for (File fileEntry : kansio.listFiles()) {
             System.out.println(fileEntry.getName());
             Matka m = lue(kansio + "\\" + fileEntry.getName());
@@ -69,9 +67,10 @@ public class TXTTallennettuLukija {
             }
 
         } catch (FileNotFoundException exp) {
-            System.out.println("Tiedostoa ei löydy");
+            ilmoittaja.ilmoita("Tiedostoa ei löydy");
+
         } catch (IOException ex) {
-            Logger.getLogger(TXTRaakaLukija.class.getName()).log(Level.SEVERE, null, ex);
+            ilmoittaja.ilmoita("Tiedostoa ei voida lukea");
         }
 
         Matka uusimatka = new Matka(lat, lon, time, accuracy);

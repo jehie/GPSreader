@@ -45,7 +45,7 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         luolista();
         initComponents();
-        luoMatkojenTiedot();
+        paivitaMatkojenTiedot();
 
     }
 
@@ -77,9 +77,9 @@ public class GUI extends javax.swing.JFrame {
         jList2.setModel(malli);
     }
 
-    private void luoMatkojenTiedot() {
+    private void paivitaMatkojenTiedot() {
         String pituus = String.format("%.2f", matkakokoelma.getMatkojenpituus());
-        jLabel12.setText("Pituus " + pituus + " km");
+        jLabel12.setText("Pituus: " + pituus + " km");
 
         String keskinopeus = String.format("%.2f", matkakokoelma.getMatkojenKeskinopeus());
         jLabel14.setText("Keskinopeus: " + keskinopeus + " km/h");
@@ -136,7 +136,6 @@ public class GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(560, 317));
 
         jButton1.setText("Anna uusi tiedosto");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -305,12 +304,10 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(20, 20, 20)
                         .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -326,16 +323,19 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton7))
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -356,8 +356,6 @@ public class GUI extends javax.swing.JFrame {
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {PoistaEpaTarkatButton, jButton1});
 
-        jPanel3.getAccessibleContext().setAccessibleName("Kaikkien matkojen tiedot");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -375,12 +373,18 @@ public class GUI extends javax.swing.JFrame {
                     + tiedostonvalitsija.getSelectedFile().getPath());
             TXTRaakaLukija txtrl = new TXTRaakaLukija();
             Matka uusimatka = txtrl.lue(tiedostonvalitsija.getSelectedFile().getPath());
-            matkakokoelma.lisaaMatka(uusimatka);
-            TXTTallentaja tlt = new TXTTallentaja();
-            tlt.kirjoitaMatkaTiedostoon(uusimatka);
-            paivitalista();
+            if (uusimatka != null) {
+                matkakokoelma.lisaaMatka(uusimatka);
+                TXTTallentaja tlt = new TXTTallentaja();
+                tlt.kirjoitaMatkaTiedostoon(uusimatka);
+                paivitalista();
+                JOptionPane.showMessageDialog(parent, "Tiedosto luettu ja" + " tallennettu ohjelmaan!");
+                paivitaMatkojenTiedot();
+            } else {
+                JOptionPane.showMessageDialog(parent, "Tiedosto on viallinen!");
 
-            JOptionPane.showMessageDialog(parent, "Tiedosto luettu ja" + " tallennettu ohjelmaan!");
+            }
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -439,17 +443,6 @@ public class GUI extends javax.swing.JFrame {
 
         String keskinopeus = String.format("%.1f", matkakokoelma.getMatkaNimella(valittu).getKeskinopeus());
         jLabel8.setText("Keskinopeus: " + keskinopeus + "km/h");
-
-//        //BufferedImage myPicture = ImageIO.read(new File("C:\\Users\\Jesse\\Documents\\Javalabra\\GPSreader\\GPSreader\\kartta.jpg"));
-//        ImageIcon ikoni = new ImageIcon("kartta.jpg");
-//        
-//        JLabel kuva = new JLabel(ikoni, JLabel.CENTER);
-//        
-//        jPanel1.add(kuva);
-//        jPanel1.revalidate();
-//        jPanel1.repaint();
-//        jPanel1.setVisible(true);
-
     }//GEN-LAST:event_jList2MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -498,7 +491,7 @@ public class GUI extends javax.swing.JFrame {
         } else {
 
             int koko = matkakokoelma.getMatkaNimella(valittu).getLatitudi().size();
-            String osoite = gmor.rakennaOsoitePolulla(matkakokoelma.getMatkaNimella(valittu).getLatitudi(), matkakokoelma.getMatkaNimella(valittu).getLongitudi(), "hybrid");
+            String osoite = gmor.rakennaOsoitePolulla(matkakokoelma.getMatkaNimella(valittu).getLatitudi(), matkakokoelma.getMatkaNimella(valittu).getLongitudi(), "roadmap");
 
             GoogleMaps gm = new GoogleMaps();
             try {
@@ -517,7 +510,7 @@ public class GUI extends javax.swing.JFrame {
         } else {
             double lat = matkakokoelma.getMatkaNimella(valittu).getLatitudi().get(0);
             double lon = matkakokoelma.getMatkaNimella(valittu).getLongitudi().get(0);
-            String osoite = gmor.rakennaOsoiteMarkereilla(lat, lon, "satellite", 18);
+            String osoite = gmor.rakennaOsoiteMarkereilla(lat, lon, "roadmap", 18);
 
             GoogleMaps gm = new GoogleMaps();
             try {
@@ -536,7 +529,7 @@ public class GUI extends javax.swing.JFrame {
             int koko = matkakokoelma.getMatkaNimella(valittu).getLatitudi().size() - 1;
             double lat = matkakokoelma.getMatkaNimella(valittu).getLatitudi().get(koko);
             double lon = matkakokoelma.getMatkaNimella(valittu).getLongitudi().get(koko);
-            String osoite = gmor.rakennaOsoiteMarkereilla(lat, lon, "satellite", 18);
+            String osoite = gmor.rakennaOsoiteMarkereilla(lat, lon, "roadmap", 18);
 
             GoogleMaps gm = new GoogleMaps();
             try {

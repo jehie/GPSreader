@@ -22,7 +22,7 @@ public class MatkaLaskin {
     }
 
     /**
-     * Laskee etäisyyden kahden koordinaatin välillä, käyttäen harersinen
+     * Laskee etäisyyden kahden koordinaatin välillä, käyttäen haversinen
      * kaavaa.
      *
      * @param alkuLat ensimmäisen koordinaatin Latitudi

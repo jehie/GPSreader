@@ -32,7 +32,7 @@ public class Matka {
     private MatkaLaskin matkalaskin;
 
     /**
-     * Konstruktori Matka-luokalle
+     * Konstruktori Matka-luokalle. Laskee matkalle nimen.
      *
      * @param latitudi Jokaisen mittauksen latitudit listana
      * @param longitudi Jokaisen mittauksen longitudit listana
@@ -61,18 +61,8 @@ public class Matka {
 
     }
 
-    //Kesken
-//    public void laskeMinimiJaMaksimiNopeudet() {
-//        for (int i = 0; i < latitudit.size() - 1; i++) {
-//            Double k = matkalaskin.laskeNopeus(aikaleimat.get(i), aikaleimat.get(i + 1),
-//                    matkalaskin.laskeEtaisyys(latitudit.get(i), longitudit.get(i), latitudit.get(i + 1), longitudit.get(i + 1)));
-//            System.out.println("Laskettu " + k);
-//        }
-//
-//    }
-    
      /**
-     * Muodostaa matkalle nimen aikaleiman perusteella
+     * Muodostaa matkalle nimen aikaleiman perusteella.
      *
      */
     public void laskeMatkanNimi() {

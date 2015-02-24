@@ -29,7 +29,7 @@ public class MatkaTest {
     @Before
     public void setUp() {
 
-        m = lukija.lue("20150118162507.txt");
+        m = lukija.lue("testimatkat\\20150118162507.txt");
     }
 
     @After

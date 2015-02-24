@@ -11,24 +11,17 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class GoogleMaps {
 
-
     public void avaaKartta(String osoite) throws IOException {
-        GoogleMapsOsoitteenRakentaja gmor = new GoogleMapsOsoitteenRakentaja();
-        //String osoite = gmor.rakennaOsoite(lat, lon, kuvatyyppi, zoom);
-        //String osoite = gmor.rakennaOsoiteMarkereilla(lat, lon, lat, lon, kuvatyyppi, zoom);
-        //String osoite = gmor.rakennaOsoitePolulla(latitudit, longitudit, kuvatyyppi, zoom);
-        
-        
+
         System.out.println(osoite);
 
-        JFrame freimi = new JFrame("Google Maps");
+        JFrame freimi = new JFrame("Google Maps Kartta");
 
         try {
-            //String osoite = "https://maps.googleapis.com/maps/api/staticmap?center=Helsinki,Finland&zoom=11&size=1024x800&key=AIzaSyDqqBJ4sBUY34znGoJA9IXQ3e-n4iEKzuU";
-           
             String tiedosto = "kartta.jpg";
             URL url = new URL(osoite);
             InputStream is = url.openStream();
@@ -44,7 +37,7 @@ public class GoogleMaps {
             is.close();
             os.close();
         } catch (IOException e) {
-            System.out.println("Virhe kuvanlatauksessa, tarkista internet yhteys");  
+            JOptionPane.showMessageDialog(null, "Virhe kuvanlatauksessa, tarkista internet yhteys");
         }
 
         freimi.add(new JLabel(new ImageIcon((new ImageIcon("kartta.jpg")).getImage().getScaledInstance(630, 600,
