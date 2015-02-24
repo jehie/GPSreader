@@ -19,14 +19,14 @@ import kayttoliittyma.Ilmoittaja;
  */
 public class TXTTallennettuLukija {
     Ilmoittaja ilmoittaja = new Ilmoittaja();
-    File kansio = new File("matkat\\");
+    File kansio = new File("matkat/");
 
     //Lukee kaikki kansiossa olevat TXTTallentajalla tallennetut tiedostot
     public MatkaKokoelma lueKaikkiTallennetutTiedostot() {
         MatkaKokoelma mko = new MatkaKokoelma();
         for (File fileEntry : kansio.listFiles()) {
             System.out.println(fileEntry.getName());
-            Matka m = lue(kansio + "\\" + fileEntry.getName());
+            Matka m = lue(kansio + "/" + fileEntry.getName());
             mko.lisaaMatka(m);
         }
         System.out.println("");

@@ -20,7 +20,7 @@ public class TXTTallentaja {
     public boolean kirjoitaMatkaTiedostoon(Matka talletettavaMatka) {
         String nimi = talletettavaMatka.getMatkanNimi();
         try {
-            FileWriter kirjoittaja = new FileWriter("matkat\\" + nimi + ".txt");
+            FileWriter kirjoittaja = new FileWriter("matkat/" + nimi + ".txt");
             
             for (int i = 0; i < talletettavaMatka.getLatitudi().size(); i++) {
                 String lat = Double.toString(talletettavaMatka.getLatitudi().get(i));
