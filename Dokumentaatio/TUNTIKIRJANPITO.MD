@@ -21,5 +21,5 @@
 *23.2.2015 - 3h - Käyttöliittymän muokkaamista.
 *25.2.2015 - 4h - Testien päivittämistä
 *26.2.2015 - 4h - Virhetilanteisiin varautumisen parantamista
-*27.2.2015 - 5h - Javadocin ja testien päivittämistä, bugien etsimistä
+*27.2.2015 - 6h - Javadocin ja testien päivittämistä, bugien etsimistä, viimeistelyä :)
 

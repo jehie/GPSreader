@@ -12,9 +12,21 @@ import java.util.Collection;
  */
 public class MatkaKokoelma {
 
+    /**
+     * Lista Matka-oliota
+     */
     private ArrayList<Matka> matkat;
+    /**
+     * Matkojen yhteispituus
+     */
     private double matkojenpituus;
+    /**
+     * TXTTallentaja-luokan olio ilmentymä
+     */
     private TXTTallentaja tallentaja;
+    /**
+     * Matkojen yhteispituus
+     */
     private double matkojenkesto;
 
     /**
@@ -32,9 +44,10 @@ public class MatkaKokoelma {
      * Poistaa Matkan kokoelmasta nimen perusteella
      *
      * @param nimi Poistettavan matkan nimi
+     * @param kansio Kansio josta tiedosto poistetaan
      * @return Onnistuiko matkan poisto
      */
-    public boolean poistaMatkaNimella(String nimi) {
+    public boolean poistaMatkaNimella(String nimi, String kansio) {
         int pois = -1;
         for (int i = 0; i < matkat.size(); i++) {
             if (nimi.equals(matkat.get(i).getMatkanNimi())) {
@@ -44,7 +57,7 @@ public class MatkaKokoelma {
 
         if (pois != -1) {
             matkat.remove(pois);
-            File poistettava = new File("matkat/" + nimi + ".txt");
+            File poistettava = new File(kansio + "/" + nimi + ".txt");
             boolean ok = poistettava.delete();
             return true;
         }
@@ -95,14 +108,18 @@ public class MatkaKokoelma {
      * määrittelemä minimitarkkuus
      *
      * @param tarkkuus tarkkuus jota suuremmat poistetaan
+     * @param kansio Kansio josssa tiedostot sijaitsevat
      */
-    public void PoistaEpaTarkatMittaukset(int tarkkuus, String tallennuskansio) {
+    public void PoistaEpaTarkatMittaukset(int tarkkuus, String kansio) {
         for (Matka m : matkat) {
             m.poistaEpaTarkatMittaukset(tarkkuus);
-            tallentaja.kirjoitaMatkaTiedostoon(m, tallennuskansio);
+            tallentaja.kirjoitaMatkaTiedostoon(m, kansio);
         }
     }
 
+    /**
+     * Laskee kaikkien MatkaKokoelmassa olevien matkojen yhteiskeston
+     */
     private void laskeMatkojenKesto() {
         matkojenkesto = 0.0;
 
@@ -121,6 +138,9 @@ public class MatkaKokoelma {
         return getMatkojenpituus() / (getMatkojenkesto() / 60);
     }
 
+    /**
+     * Laskee kaikkien MatkaKokoelmassa olevien matkojen yhteispituuden
+     */
     private void laskeMatkojenPituus() {
         matkojenpituus = 0.0;
 
@@ -141,7 +161,8 @@ public class MatkaKokoelma {
     }
 
     /**
-     * Palauttaa matkojen yhteiskesto, jota ennen laskee sen käyttäen laskeMatkojenKesto()-metodilla.
+     * Palauttaa matkojen yhteiskesto, jota ennen laskee sen käyttäen
+     * laskeMatkojenKesto()-metodilla.
      *
      * @return Matkoihin käytetyn ajan yhteiskesto
      *

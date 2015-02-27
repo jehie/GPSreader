@@ -70,7 +70,7 @@ public class MatkaTest {
     @Test
     public void muutaMatkanAikaaToimii() {
         int vuosi = m.getAikaleima().get(0).getYear();
-        m.muutaAika("2004", "1", "25");
+        m.muutaAika("2012", "1", "25");
         int vuosi_muutettu = m.getAikaleima().get(0).getYear();
 
         assertTrue(vuosi_muutettu < vuosi);
@@ -90,16 +90,13 @@ public class MatkaTest {
     @Test
     public void getKeskiNopeusToimii() {
         double kn = m.getKeskinopeus();
-
         assertTrue(kn > 3.0);
-
     }
 
     @Test
     public void getKuljettuMatkaToimii() {
         double kuljettumatka = m.getKuljettumatka();
         assertTrue(kuljettumatka < 8 || kuljettumatka > 7.5);
-
     }
 
     @Test
@@ -113,5 +110,4 @@ public class MatkaTest {
         m.setPaiva("10");
         assertTrue("10" == m.getPaiva());
     }
-
 }

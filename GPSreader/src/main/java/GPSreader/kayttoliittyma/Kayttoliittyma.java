@@ -30,18 +30,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * Ohjelman graafinen käyttöliittymä.
+ */
 public class Kayttoliittyma extends javax.swing.JFrame {
 
-    MatkaKokoelma matkaKokoelma;
-    MatkaLaskin matkalaskin;
-    Ilmoittaja ilmoittaja;
-    DefaultListModel<String> malli;
-    GoogleMapsOsoitteenRakentaja googleMapsOsoitteenRakentaja;
-    TXTTallennettuLukija txtTallennettuLukija;
-    TXTTallentaja txtTallentaja;
-    Validoija validoija;
-    Muuntaja muuntaja;
-    String kansio;
+    private MatkaKokoelma matkaKokoelma;
+    private MatkaLaskin matkalaskin;
+    private Ilmoittaja ilmoittaja;
+    private DefaultListModel<String> malli;
+    private GoogleMapsOsoitteenRakentaja googleMapsOsoitteenRakentaja;
+    private TXTTallennettuLukija txtTallennettuLukija;
+    private TXTTallentaja txtTallentaja;
+    private Validoija validoija;
+    private Muuntaja muuntaja;
+    private String kansio;
 
     /**
      * Graafisen käyttöliittymän konstruktori. Alustaa oliomuuttujat, käynnistää
@@ -83,10 +86,13 @@ public class Kayttoliittyma extends javax.swing.JFrame {
             JFileChooser tiedostonvalitsija = new JFileChooser();
             tiedostonvalitsija.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             int palautusarvo = tiedostonvalitsija.showOpenDialog(null);
+            boolean tiedostoOlemassa = new File(tiedostonvalitsija.getSelectedFile().getPath()).exists();
+            if (tiedostoOlemassa) {
 
-            if (palautusarvo == JFileChooser.APPROVE_OPTION) {
-                kansio = tiedostonvalitsija.getSelectedFile().getPath();
+                if (palautusarvo == JFileChooser.APPROVE_OPTION) {
+                    kansio = tiedostonvalitsija.getSelectedFile().getPath();
 
+                }
             }
             if (kansio != null) {
                 break;
@@ -438,20 +444,25 @@ public class Kayttoliittyma extends javax.swing.JFrame {
         int palautusarvo = tiedostonvalitsija.showOpenDialog(null);
         if (palautusarvo == JFileChooser.APPROVE_OPTION) {
 
-            TXTRaakaLukija txtrl = new TXTRaakaLukija();
-            Matka uusimatka = txtrl.lue(tiedostonvalitsija.getSelectedFile().getPath());
-            if (uusimatka != null) {
-                matkaKokoelma.lisaaMatka(uusimatka);
-                TXTTallentaja tlt = new TXTTallentaja();
-                tlt.kirjoitaMatkaTiedostoon(uusimatka, kansio);
-                paivitaMatkaLista();
-                ilmoittaja.ilmoita("Tiedosto luettu ja" + " tallennettu ohjelmaan!");
-                paivitaMatkojenTiedot();
+            boolean tiedostoOlemassa = new File(tiedostonvalitsija.getSelectedFile().getPath()).exists();
+            if (tiedostoOlemassa) {
+
+                TXTRaakaLukija txtrl = new TXTRaakaLukija();
+                Matka uusimatka = txtrl.lue(tiedostonvalitsija.getSelectedFile().getPath());
+                if (uusimatka != null) {
+                    matkaKokoelma.lisaaMatka(uusimatka);
+                    TXTTallentaja tlt = new TXTTallentaja();
+                    tlt.kirjoitaMatkaTiedostoon(uusimatka, kansio);
+                    paivitaMatkaLista();
+                    ilmoittaja.ilmoita("Tiedosto luettu ja" + " tallennettu ohjelmaan!");
+                    paivitaMatkojenTiedot();
+                } else {
+                    ilmoittaja.ilmoita("Tiedosto on viallinen!");
+
+                }
             } else {
-                ilmoittaja.ilmoita("Tiedosto on viallinen!");
-
+                ilmoittaja.ilmoita("Tiedostoa ei löydy");
             }
-
         }
     }//GEN-LAST:event_AnnaTiedostoJButtonActionPerformed
 
@@ -480,8 +491,7 @@ public class Kayttoliittyma extends javax.swing.JFrame {
             matkaKokoelma.PoistaEpaTarkatMittaukset(tarkkuusint, kansio);
 
             ilmoittaja.ilmoita("Epätarkat mittaukset poistettu!");
-            //JOptionPane.showMessageDialog(parent, "Epätarkat mittaukset poistettu!");
-            System.out.println(tarkkuus);
+
             paivitaMatkojenTiedot();
         }
 
@@ -498,7 +508,7 @@ public class Kayttoliittyma extends javax.swing.JFrame {
         if (nimi == null) {
             ilmoittaja.ilmoita("Valitse poistettava matka!");
         } else {
-            matkaKokoelma.poistaMatkaNimella(nimi);
+            matkaKokoelma.poistaMatkaNimella(nimi, kansio);
             paivitaMatkaLista();
             paivitaMatkojenTiedot();
             ilmoittaja.ilmoita("Matka poistettu!");
@@ -510,21 +520,21 @@ public class Kayttoliittyma extends javax.swing.JFrame {
 
     private void matkatJListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matkatJListMouseClicked
         String valittu = (String) matkatJList.getSelectedValue();
+        if (valittu != null) {
+            matkanVuosiJLabel.setText("Vuosi: " + matkaKokoelma.getMatkaNimella(valittu).getVuosi());
+            String kuukausi = muuntaja.matkanKuukausiTekstina(matkaKokoelma.getMatkaNimella(valittu).getKuukausi());
+            matkanKuukausiJLabel.setText("Kuukausi: " + kuukausi);
+            matkanPaivaJlabel.setText("Päivä: " + matkaKokoelma.getMatkaNimella(valittu).getPaiva());
 
-        matkanVuosiJLabel.setText("Vuosi: " + matkaKokoelma.getMatkaNimella(valittu).getVuosi());
-        String kuukausi = muuntaja.matkanKuukausiTekstina(matkaKokoelma.getMatkaNimella(valittu).getKuukausi());
-        matkanKuukausiJLabel.setText("Kuukausi: " + kuukausi);
-        matkanPaivaJlabel.setText("Päivä: " + matkaKokoelma.getMatkaNimella(valittu).getPaiva());
-        System.out.println(matkaKokoelma.getMatkaNimella(valittu).getPaiva());
+            String pituus = String.format("%.2f", matkaKokoelma.getMatkaNimella(valittu).getKuljettumatka());
+            matkanPituusJLabel.setText("Pituus: " + pituus + " km");
 
-        String pituus = String.format("%.2f", matkaKokoelma.getMatkaNimella(valittu).getKuljettumatka());
-        matkanPituusJLabel.setText("Pituus: " + pituus + " km");
+            String kesto = String.format("%.1f", matkaKokoelma.getMatkaNimella(valittu).getKesto());
+            matkanKestoJLabel.setText("Kesto: " + kesto + " min");
 
-        String kesto = String.format("%.1f", matkaKokoelma.getMatkaNimella(valittu).getKesto());
-        matkanKestoJLabel.setText("Kesto: " + kesto + " min");
-
-        String keskinopeus = String.format("%.1f", matkaKokoelma.getMatkaNimella(valittu).getKeskinopeus());
-        matkanKeskinopeusJlabel.setText("Keskinopeus: " + keskinopeus + "km/h");
+            String keskinopeus = String.format("%.1f", matkaKokoelma.getMatkaNimella(valittu).getKeskinopeus());
+            matkanKeskinopeusJlabel.setText("Keskinopeus: " + keskinopeus + "km/h");
+        }
     }//GEN-LAST:event_matkatJListMouseClicked
 
     private void muokkaaMatkaaJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muokkaaMatkaaJButtonActionPerformed
@@ -549,14 +559,16 @@ public class Kayttoliittyma extends javax.swing.JFrame {
 
             JOptionPane.showInputDialog(null, paneeli);
             String uusivuosi = vuosi.getText();
+
             String uusikuukausi = kuukausi.getText();
+
             String uusipaiva = paiva.getText();
 
             //Haetaan matka kokoelmasta
             Matka m = matkaKokoelma.getMatkaNimella(valittu);
 
             //Poistetaan matka kokoelmasta ja tallennetaan muokattu tilalle
-            matkaKokoelma.poistaMatkaNimella(valittu);
+            matkaKokoelma.poistaMatkaNimella(valittu, kansio);
             m.muutaAika(uusivuosi, uusikuukausi, uusipaiva);
             matkaKokoelma.lisaaMatka(m);
             txtTallentaja.kirjoitaMatkaTiedostoon(m, kansio);
@@ -622,7 +634,7 @@ public class Kayttoliittyma extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_MatkanLoppuJButtonActionPerformed
     /**
-     * Metodi käynnistää käyttöliittymä-luokan ja asettaa sen näkyviin. 
+     * Metodi käynnistää käyttöliittymä-luokan ja asettaa sen näkyviin.
      *
      */
     public static void main(String args[]) {

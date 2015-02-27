@@ -1,0 +1,24 @@
+-classpath
+'C:/Users/Jesse/.m2/repository/org/jdesktop/beansbinding/1.2.1/beansbinding-1.2.1.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'C:/Users/Jesse/Documents/Javalabra/GPSreader/GPSreader/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2015. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Jesse/Documents/Javalabra/GPSreader/GPSreader/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'GPSreader 1.0-SNAPSHOT API'
+-linkoffline
+'http://docs.oracle.com/javase/7/docs/api' 'C:/Users/Jesse/Documents/Javalabra/GPSreader/GPSreader/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'GPSreader 1.0-SNAPSHOT API'

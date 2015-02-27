@@ -39,7 +39,6 @@ public class Matka {
      * @param aikaleima Jokaisen mittauksen aikaleimat listana
      * @param tarkkuus GPS:n mittaustarkkuus listana
      * @see laskeMatkanNimi();
-     *
      */
     public Matka(ArrayList<Double> latitudi, ArrayList<Double> longitudi,
             ArrayList<Date> aikaleima, ArrayList<Double> tarkkuus) {
@@ -98,7 +97,6 @@ public class Matka {
 
         for (int i = 0; i < latitudit.size() - 1; i++) {
             kuljettumatka += matkalaskin.laskeEtaisyys(latitudit.get(i), longitudit.get(i), latitudit.get(i + 1), longitudit.get(i + 1));
-
         }
 
     }
@@ -159,6 +157,11 @@ public class Matka {
         return matkannimi;
     }
 
+    /**
+     * Laskee ja palauttaa Matkan keskinopeuden
+     *
+     * @return Matkan keskinopeus
+     */
     public double getKeskinopeus() {
         return getKuljettumatka() / (getKesto() / 60);
     }

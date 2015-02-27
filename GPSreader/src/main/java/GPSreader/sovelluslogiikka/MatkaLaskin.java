@@ -2,7 +2,6 @@ package GPSreader.sovelluslogiikka;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Luokka jolla lasketaan Matka-oliohin liittyviä muuttujia sekä muutetaan
@@ -10,9 +9,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class MatkaLaskin {
 
+    Validoija validoija;
+
     /**
      * Muuttaa Matka-olion aikaleimojen tietoja. Metodilla voidaan muuttaa
-     * vuosi, kuukausi ja päivä
+     * vuosi, kuukausi ja päivä. Metodi tarkistaa ovat arvot järkeviä
      *
      * @param vuosi Käyttäjän valitsema uusi Vuosi
      * @param kuukausi Käyttäjän valitsema uusi Kuukausi
@@ -21,15 +22,39 @@ public class MatkaLaskin {
      * @return Palauttaa muokatun listan aikaleimoista
      */
     public ArrayList<Date> muutaAika(String vuosi, String kuukausi, String paiva, ArrayList<Date> aikaleimat) {
+        validoija = new Validoija();
 
-        for (Date a : aikaleimat) {
-            a.setYear(Integer.valueOf(vuosi));
-            a.setMonth(Integer.valueOf(kuukausi));
-            a.setDate(Integer.valueOf(paiva));
+        boolean vuosiOnInteger = validoija.validoiOnkoInputInteger(vuosi);
+        boolean kuukausiOnInteger = validoija.validoiOnkoInputInteger(kuukausi);
+        boolean paivaOnInteger = validoija.validoiOnkoInputInteger(paiva);
+
+        if (vuosiOnInteger && kuukausiOnInteger && paivaOnInteger) {
+
+            int vuosiInt = Integer.valueOf(vuosi);
+            int kuukausiInt = Integer.valueOf(kuukausi);
+            int paivaInt = Integer.valueOf(paiva);
+
+            boolean vuosiOnJarkeva = validoija.tarkistaOnkoVuosiJarkeva(vuosiInt);
+            System.out.println(vuosiOnJarkeva);
+            boolean paivaOnJarkeva = validoija.tarkistaOnkoPaivaJarkeva(paivaInt);
+            System.out.println(paivaOnJarkeva);
+            boolean kuukausiOnJarkeva = validoija.tarkistaOnkoKuukausiJarkeva(kuukausiInt);
+            System.out.println(kuukausiOnJarkeva);
+
+            if (vuosiOnJarkeva && paivaOnJarkeva && kuukausiOnJarkeva) {
+                for (Date a : aikaleimat) {
+                    a.setYear(vuosiInt);
+                    a.setMonth(kuukausiInt);
+                    a.setDate(paivaInt);
+                }
+                return aikaleimat;
+
+            }
 
         }
-
+        
         return aikaleimat;
+
     }
 
     /**

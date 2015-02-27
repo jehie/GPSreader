@@ -1,8 +1,8 @@
 package GPSreader.sovelluslogiikka;
 
 /**
- * Luokka validoi erilaisia Matkaan ja GoogleMaps osoitteeseen liittyviä
- * muuttujia
+ * Luokka validoi erilaisia Matkaan, tiedostoon ja GoogleMaps osoitteeseen
+ * liittyviä muuttujia
  */
 public class Validoija {
 
@@ -111,7 +111,6 @@ public class Validoija {
      */
     public boolean tarkistaErotin(String rivi) {
         if (rivi.contains(",") && rivi.contains(".") && !rivi.contains("@") && !rivi.contains("€")) {
-            System.out.println("Erotin ok");
             return true;
         }
 
@@ -129,18 +128,61 @@ public class Validoija {
     public boolean tarkistaHeaderRaakaMatkalta(String ensimmainenrivi) {
 
         if (ensimmainenrivi.equals("time,lat,lon,elevation,accuracy,bearing,speed")) {
-            System.out.println("Header ok");
             return true;
         }
         return false;
     }
 
     /**
-     * Tarkistaa sisältääkö rivi mitään kirjaimia.
+     * Tarkistaa onko Päivän numero mahdollinen.
+     *
+     * @param paiva Päivä numerona
+     * @return Onko Päivän numero järkevä
+     *
+     */
+    public boolean tarkistaOnkoPaivaJarkeva(int paiva) {
+        if (paiva > 0 && paiva < 32) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Tarkistaa onko Vuosi järkevä, maksimi on 2019 ja minimi 2011.
+     *
+     * @param vuosi vuosi numero
+     * @return Onko vuosiluku järkevä
+     *
+     */
+    public boolean tarkistaOnkoVuosiJarkeva(int vuosi) {
+        if (vuosi > 2010 && vuosi < 2020) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Tarkistaa onko kuukausi järkevä.
+     *
+     * @param kuukausi kuukauden luku
+     * @return Onko kuukausi järkevä
+     *
+     */
+    public boolean tarkistaOnkoKuukausiJarkeva(int kuukausi) {
+        if (kuukausi < 13 && kuukausi > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Tarkistaa sisältääkö vain sallittuja merkkejä
      *
      * @param rivi tarkistettava rivi(String)
      *
-     * @return Sisältääkö rivi kirjaimia
+     * @return Sisältääkö rivi vain sallittuja merkkejä
      *
      */
     public boolean TallennetunMatkanRiviSisaltaaOikeatMerkit(String rivi) {
@@ -153,16 +195,23 @@ public class Validoija {
 
     }
 
+    /**
+     * Tarkistaa sisältääkö RaakaMatkan yksittäinen rivi vain sallittuja
+     * merkkejä, oikein määrän.
+     *
+     * @param rivi tarkistettava rivi(String)
+     *
+     * @return Onko rivi oikeanlainen
+     *
+     */
     public boolean RaakaMatkanRiviSisaltaaOikeatMerkit(String rivi) {
         int pist = rivi.length() - rivi.replace(".", "").length();
         int pilk = rivi.length() - rivi.replace(",", "").length();
         int T = rivi.length() - rivi.replace("T", "").length();
+
         if (pist != 6 || pilk != 6 || T != 1) {
-            System.out.println(rivi);
-            System.out.println("Merkkejä väärä määr");
             return false;
         }
-        System.out.println("Merkit ok");
         return rivi.matches("^[0-9,.T:Z-]+$");
 
     }

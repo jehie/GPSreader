@@ -21,11 +21,11 @@ import GPSreader.kayttoliittyma.Ilmoittaja;
  */
 public class TXTRaakaLukija {
 
-    Ilmoittaja ilmoittaja = new Ilmoittaja();
-    Validoija validoija = new Validoija();
-    Muuntaja muuntaja = new Muuntaja();
-    BufferedReader bufferoitulukija;
-    String erotin = ",";
+    private Ilmoittaja ilmoittaja = new Ilmoittaja();
+    private Validoija validoija = new Validoija();
+    private Muuntaja muuntaja = new Muuntaja();
+    private BufferedReader bufferoitulukija;
+    private String erotin = ",";
 
     /**
      * Lukee annetun tiedoston sisään, tarkistaa sen oikeellisuuden ja parsii
@@ -74,9 +74,9 @@ public class TXTRaakaLukija {
             }
 
         } catch (FileNotFoundException exp) {
-            ilmoittaja.ilmoita("Tiedostoa ei löydy");
+            return null;
         } catch (IOException ex) {
-            ilmoittaja.ilmoita("Tiedostoa ei voida lukea");
+            return null;
         }
 
         Matka uusimatka = new Matka(lat, lon, time, accuracy);

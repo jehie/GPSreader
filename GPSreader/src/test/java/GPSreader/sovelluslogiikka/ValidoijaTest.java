@@ -100,7 +100,7 @@ public class ValidoijaTest {
 
     @Test
     public void RaakaMatkanRiviSisaltaaOikeatMerkitToimii() {
-        
+
         assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit("2014-01-18T15:02:07Z,60.228310,25.022108,110.800003,19.000000,298.100006,0.707107") == true);
         assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit("2014-01-18T15:02:07Z,60.228310,25.022108,110.800003,,,19.000000,298.100006,0.707107") == false);
         assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit("60.224515,25.021293,61382406308468,6.0") == false);
@@ -111,6 +111,37 @@ public class ValidoijaTest {
         assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit(".........") == false);
         assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit("60.224515,25.021293,,,61382406308468,6.0") == false);
     }
-    
 
+    @Test
+    public void tarkistaOnkoPaivaJarkevaToimiiOikein() {
+        assertTrue(validoija.tarkistaOnkoPaivaJarkeva(12) == true);
+        assertTrue(validoija.tarkistaOnkoPaivaJarkeva(1) == true);
+        assertTrue(validoija.tarkistaOnkoPaivaJarkeva(31) == true);
+        assertTrue(validoija.tarkistaOnkoPaivaJarkeva(0) == false);
+        assertTrue(validoija.tarkistaOnkoPaivaJarkeva(32) == false);
+        assertTrue(validoija.tarkistaOnkoPaivaJarkeva(-1) == false);
+
+    }
+
+    @Test
+    public void tarkistaOnkoVuosiJarkevaToimiiOikein() {
+        assertTrue(validoija.tarkistaOnkoVuosiJarkeva(2011) == true);
+        assertTrue(validoija.tarkistaOnkoVuosiJarkeva(2015) == true);
+        assertTrue(validoija.tarkistaOnkoVuosiJarkeva(2019) == true);
+        assertTrue(validoija.tarkistaOnkoVuosiJarkeva(0) == false);
+        assertTrue(validoija.tarkistaOnkoVuosiJarkeva(2009) == false);
+        assertTrue(validoija.tarkistaOnkoVuosiJarkeva(-1) == false);
+
+    }
+
+    @Test
+    public void tarkistaOnkoKuukausiJarkevaToimiiOikein() {
+        assertTrue(validoija.tarkistaOnkoKuukausiJarkeva(12) == true);
+        assertTrue(validoija.tarkistaOnkoKuukausiJarkeva(1) == true);
+        assertTrue(validoija.tarkistaOnkoKuukausiJarkeva(6) == true);
+        assertTrue(validoija.tarkistaOnkoKuukausiJarkeva(0) == false);
+        assertTrue(validoija.tarkistaOnkoKuukausiJarkeva(13) == false);
+        assertTrue(validoija.tarkistaOnkoKuukausiJarkeva(-1) == false);
+
+    }
 }

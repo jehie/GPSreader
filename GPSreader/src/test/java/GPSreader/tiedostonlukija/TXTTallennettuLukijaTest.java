@@ -21,7 +21,7 @@ public class TXTTallennettuLukijaTest {
     @Test
     public void TiedostoLuetaanOikeinSisaanOlemassaOlevallaTiedostolla() {
 
-        Matka m = tl.lueTallennettuTiedosto("testimatkat\\2015_1_18_14.txt");
+        Matka m = tl.lueTallennettuTiedosto("testimatkat/2015_1_18_14.txt");
         assertNotNull(m);
 
     }
@@ -29,18 +29,29 @@ public class TXTTallennettuLukijaTest {
     @Test
     public void LuettuTiedostoSisältääRiveja() {
 
-        Matka m = tl.lueTallennettuTiedosto("testimatkat\\2015_1_18_14.txt");
-        assertTrue(m.getAikaleima().size()>5);
-        
+        Matka m = tl.lueTallennettuTiedosto("testimatkat/2015_1_18_14.txt");
+        assertTrue(m.getAikaleima().size() > 5);
+
     }
-    
-//    @Test
-//    public void LukeeKaikkiKansiossaOlevatTiedostot() {
-//
-//        MatkaKokoelma mk = tl.lueKaikkiTallennetutTiedostot();
-//        assertTrue(mk.getMatkat().size()==2);
-//        
-//
-//    }
+
+    @Test
+    public void eiLueOlematontaTiedostoa() {
+        Matka m = tl.lueTallennettuTiedosto("mielikuvituskansio/1asda.txt");
+        assertTrue(m == null);
+    }
+
+    @Test
+    public void eiLueKansiota() {
+        Matka m = tl.lueTallennettuTiedosto("testimatkat");
+        assertTrue(m == null);
+    }
+
+    @Test
+    public void LukeeKaikkiKansiossaOlevatTiedostot() {
+
+        MatkaKokoelma mk = tl.lueKaikkiTallennetutTiedostot("testimatkat/kokoelmatesti");
+        assertTrue(mk.getMatkat().size() == 2);
+
+    }
 
 }

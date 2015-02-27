@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 /**
  * Luokka muodostaa JFrame-olion, joka sisältää Google Maps API-rajapinnasta
  * noudetun kartan.
- *
  */
 public class GoogleMaps {
 
@@ -32,9 +31,6 @@ public class GoogleMaps {
      * @see GoogleMapsOsoitteenRakentaja
      */
     public void avaaKartta(String osoite) throws IOException {
-
-        System.out.println(osoite);
-
         JFrame freimi = new JFrame("Google Maps Kartta");
 
         try {

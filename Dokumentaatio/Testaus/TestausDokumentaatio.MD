@@ -1,0 +1,3 @@
+Tiedostonkäsittelijä luokan testaus osoittautui hankalaksi käyttäen JUNIT-testejä. En onnistunut testaamaan IOExceptionia mitenkään testien avulla, vaan testasin tätä itse manuaalisesti avaamalla tiedoston johonkin toiseen ohjelmaan ja kokeilemalla lukea tätä sisään GPSreaderiin. Testi näytti toimivan. 
+
+Erilaisten virheellisten tiedostojen lukemista on testattu huomattavasti tarkemmin manuaalisesti kuin mitä JUNIT-testeillä. Testejä on tehty manuaalisesti vaihtelemalla ja muokkaamalla jo luettuja tiedostoja ja raaka tiedostoja. Myös olemattoman tiedoston lukemista on testattu manuaalisesti. 

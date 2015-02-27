@@ -2,8 +2,6 @@ package GPSreader.tiedostonlukija;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import GPSreader.sovelluslogiikka.Matka;
 
 /**

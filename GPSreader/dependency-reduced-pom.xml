@@ -44,7 +44,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>kayttoliittyma.GUI</mainClass>
+                  <mainClass>GPSreader.kayttoliittyma.Kayttoliittyma</mainClass>
                 </transformer>
               </transformers>
             </configuration>

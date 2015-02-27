@@ -27,7 +27,7 @@ public class TXTTallennettuLukija {
      * Lukee kaikki kansiossa olevat TXTTallentajalla tallennetut tiedostot.
      *
      * @param tallennuskansio Kansio josta matkoja yritetään lukea
-     *
+     * @return Palautettava MatkaKokoelma-sisältää kaikki kansiosta luetut matkat
      */
     public MatkaKokoelma lueKaikkiTallennetutTiedostot(String tallennuskansio) {
         File kansio = new File(tallennuskansio);
@@ -51,10 +51,16 @@ public class TXTTallennettuLukija {
      * Matka olion ja palauttaa sen.
      *
      * @param tiedostopolku Tiedostopolku josta tiedostoa yritetään lukea
-     *
+     * @return Matka-olio, joka muodostettu luetusta tiedostosta
      */
     public Matka lueTallennettuTiedosto(String tiedostopolku) {
-
+        
+        boolean onkoOlemassa = new File(tiedostopolku).exists();
+        boolean onkoTiedosto =  new File(tiedostopolku).isFile();
+        boolean onkoTXT =  new File(tiedostopolku).getName().endsWith("txt");
+        if(!onkoOlemassa || !onkoTiedosto || !onkoTXT){
+            return null;
+        }
         ArrayList<Double> lat = new ArrayList<Double>();
         ArrayList<Double> lon = new ArrayList<Double>();
         ArrayList<Date> time = new ArrayList<Date>();

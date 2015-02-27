@@ -21,8 +21,9 @@ public class MatkaKokoelmaTest {
        
         mk = new MatkaKokoelma();
 
-        mk.lisaaMatka(txtl.lueTallennettuTiedosto("testimatkat/2015_1_18_14.txt"));
-        mk.lisaaMatka(txtl.lueTallennettuTiedosto("testimatkat/2015_1_19_10.txt"));
+        mk.lisaaMatka(txtl.lueTallennettuTiedosto("testimatkat/kokoelmatesti/2015_1_18_14.txt"));
+        mk.lisaaMatka(txtl.lueTallennettuTiedosto("testimatkat/kokoelmatesti/2015_1_19_10.txt"));
+        System.out.println("Matkojen summa on : " +mk.getMatkat().size());
     }
 
     @Test
@@ -34,7 +35,7 @@ public class MatkaKokoelmaTest {
     public void PoistaMatkaNimellaPoistaaJosLöytyy() {
         int montaAlussa = mk.getMatkat().size();
         String poistettava = mk.getMatkat().get(0).getMatkanNimi();
-        mk.poistaMatkaNimella(poistettava);
+        mk.poistaMatkaNimella(poistettava, "testimatkat");
         assertTrue(montaAlussa > mk.getMatkat().size());
 
     }
@@ -50,12 +51,12 @@ public class MatkaKokoelmaTest {
 
     @Test
     public void PoistaMatkaNimellaPalauttaaFalseJosEiLöydy() {
-        assertTrue(!mk.poistaMatkaNimella("testinimi"));
+        assertTrue(!mk.poistaMatkaNimella("testinimi", "testimatkat"));
     }
 
     @Test
     public void PoistaMatkaNimellaPalauttaaTrueJosLoytyy() {
-        assertTrue(mk.poistaMatkaNimella(mk.getMatkat().get(0).getMatkanNimi()));
+        assertTrue(mk.poistaMatkaNimella(mk.getMatkat().get(0).getMatkanNimi(), "testimatkat"));
     }
 
     @Test
