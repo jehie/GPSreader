@@ -132,8 +132,10 @@ public class Matka {
     }
 
     /**
-     * Palauttaa matkan keston. Laskee käyttäen MatkaLaskin luokan laskeMatkanKesto-metodia.
-     *@see matkalaskin.laskeMatkanKesto(aikaleimat)
+     * Palauttaa matkan keston. Laskee käyttäen MatkaLaskin luokan
+     * laskeMatkanKesto-metodia.
+     *
+     * @see matkalaskin.laskeMatkanKesto(aikaleimat)
      * @return Matkan aika tunteina
      */
     public double getKesto() {

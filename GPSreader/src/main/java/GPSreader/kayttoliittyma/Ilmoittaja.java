@@ -10,6 +10,7 @@ public class Ilmoittaja {
 
     /**
      * Metodi muodostaa popup-ikkunan jossa ilmoitetaan jotakin käyttäjälle.
+     *
      * @param ilmoitus Merkkijono, joka näytetään käyttäjälle popup-ikkunassa.
      *
      */

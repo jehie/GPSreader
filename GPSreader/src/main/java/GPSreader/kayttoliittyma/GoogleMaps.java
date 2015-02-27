@@ -31,7 +31,7 @@ public class GoogleMaps {
      * @param osoite URL-osoite josta kartta yritetään noutaa.
      * @see GoogleMapsOsoitteenRakentaja
      */
-    public void avaaKartta(String osoite) {
+    public void avaaKartta(String osoite) throws IOException {
 
         System.out.println(osoite);
 

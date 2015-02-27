@@ -1,9 +1,5 @@
 package GPSreader.sovelluslogiikka;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * Luokka validoi erilaisia Matkaan ja GoogleMaps osoitteeseen liittyviä
  * muuttujia
@@ -160,8 +156,8 @@ public class Validoija {
     public boolean RaakaMatkanRiviSisaltaaOikeatMerkit(String rivi) {
         int pist = rivi.length() - rivi.replace(".", "").length();
         int pilk = rivi.length() - rivi.replace(",", "").length();
-        int T = rivi.length() - rivi.replace("T", "").length(); 
-        if (pist != 6 || pilk != 6 || T!=1) {
+        int T = rivi.length() - rivi.replace("T", "").length();
+        if (pist != 6 || pilk != 6 || T != 1) {
             System.out.println(rivi);
             System.out.println("Merkkejä väärä määr");
             return false;
@@ -170,7 +166,5 @@ public class Validoija {
         return rivi.matches("^[0-9,.T:Z-]+$");
 
     }
-
-
 
 }
