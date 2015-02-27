@@ -1,4 +1,4 @@
-package kayttoliittyma;
+package GPSreader.kayttoliittyma;
 
 import GPSreader.sovelluslogiikka.GoogleMapsOsoitteenRakentaja;
 import java.io.FileOutputStream;
@@ -13,9 +13,25 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+/**
+ * Luokka muodostaa JFrame-olion, joka sisältää Google Maps API-rajapinnasta
+ * noudetun kartan.
+ *
+ */
 public class GoogleMaps {
 
-    public void avaaKartta(String osoite) throws IOException {
+    /**
+     * Metodi avaa Google Maps kartan JFrame-ikkunaan. Kartta noudetaan Google
+     * Maps API -rajapinnasta HTTP-GET pyynnöllä, käyttäen InputStream-metodia.
+     * Osoite josta kartta noudetaan, muodostetaan
+     * GoogleMapsOsoitteenRakentaja-luokalla. Muodostetun JFrame-ikkunan koko on
+     * 600x600 pikseliä. Jos kuvan nouto epäonnistuu, ilmoittaa metodi
+     * virheellisesti internet-yhteydestä.
+     *
+     * @param osoite URL-osoite josta kartta yritetään noutaa.
+     * @see GoogleMapsOsoitteenRakentaja
+     */
+    public void avaaKartta(String osoite) {
 
         System.out.println(osoite);
 

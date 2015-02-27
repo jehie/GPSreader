@@ -1,11 +1,14 @@
 package GPSreader.sovelluslogiikka;
 
 import GPSreader.tiedostonlukija.TXTTallentaja;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * MatkaKokoelma joka sisältää useita matkoja
+ * MatkaKokoelma joka sisältää useita matkoja. Kokoelman matkoille voidaan
+ * laskea kokonaismatka, kokonaisaika ja keskinopeus. Kokoelmaan voidaan lisätä
+ * matkoja ja niitä voidaan poistaa.
  */
 public class MatkaKokoelma {
 
@@ -15,9 +18,21 @@ public class MatkaKokoelma {
     private double matkojenkesto;
 
     /**
+     * MatkaKokoelman konstuktori, alustaa muuttujat ja asettaa matkojenkestoksi
+     * 0.
+     *
+     */
+    public MatkaKokoelma() {
+        tallentaja = new TXTTallentaja();
+        matkat = new ArrayList<Matka>();
+        matkojenkesto = 0.0;
+    }
+
+    /**
      * Poistaa Matkan kokoelmasta nimen perusteella
      *
-     * @param nimi Etsittävä nimi
+     * @param nimi Poistettavan matkan nimi
+     * @return Onnistuiko matkan poisto
      */
     public boolean poistaMatkaNimella(String nimi) {
         int pois = -1;
@@ -29,6 +44,8 @@ public class MatkaKokoelma {
 
         if (pois != -1) {
             matkat.remove(pois);
+            File poistettava = new File("matkat/" + nimi + ".txt");
+            boolean ok = poistettava.delete();
             return true;
         }
 
@@ -36,9 +53,10 @@ public class MatkaKokoelma {
     }
 
     /**
-     * Palauttaa Matkan kokoelmasta nimen perusteella
+     * Palauttaa Matkan kokoelmasta nimen perusteella.
      *
      * @param nimi Etsittävä nimi
+     * @return Palautettava Matka-olio
      */
     public Matka getMatkaNimella(String nimi) {
         for (Matka m : matkat) {
@@ -49,12 +67,11 @@ public class MatkaKokoelma {
         return null;
     }
 
-    public MatkaKokoelma() {
-        tallentaja = new TXTTallentaja();
-        matkat = new ArrayList<Matka>();
-        matkojenkesto = 0.0;
-    }
-
+    /**
+     * Palauttaa MatkaKokoelmassa olevien Matkojen yhteispituuden kilometreinä.
+     *
+     * @return Matkojen yhteispituus kilometreinä
+     */
     public double getMatkojenpituus() {
         if (matkat.size() == 0) {
             return 0.0;
@@ -64,6 +81,11 @@ public class MatkaKokoelma {
         return matkojenpituus;
     }
 
+    /**
+     * Palauttaa MatkaKokoelmassa olevat Matkat listana.
+     *
+     * @return Kokoelmassa olevat matkat
+     */
     public ArrayList<Matka> getMatkat() {
         return matkat;
     }
@@ -74,10 +96,10 @@ public class MatkaKokoelma {
      *
      * @param tarkkuus tarkkuus jota suuremmat poistetaan
      */
-    public void PoistaEpaTarkatMittaukset(int tarkkuus) {
+    public void PoistaEpaTarkatMittaukset(int tarkkuus, String tallennuskansio) {
         for (Matka m : matkat) {
             m.poistaEpaTarkatMittaukset(tarkkuus);
-            tallentaja.kirjoitaMatkaTiedostoon(m);
+            tallentaja.kirjoitaMatkaTiedostoon(m, tallennuskansio);
         }
     }
 
@@ -93,6 +115,7 @@ public class MatkaKokoelma {
      * Palauttaa Matkakokoelmassa olevien matkojen keskinopeuden laskemalla sen
      * matkojen yhteispituudesta ja yhteiskestosta
      *
+     * @return Matkojen keskinopeus
      */
     public double getMatkojenKeskinopeus() {
         return getMatkojenpituus() / (getMatkojenkesto() / 60);
@@ -110,11 +133,19 @@ public class MatkaKokoelma {
     /**
      * Lisää Matka-olion kokoelmaan
      *
+     * @param matka Lisättävä matka
+     *
      */
     public void lisaaMatka(Matka matka) {
         matkat.add(matka);
     }
 
+    /**
+     * Palauttaa matkojen yhteiskesto, jota ennen laskee sen käyttäen laskeMatkojenKesto()-metodilla.
+     *
+     * @return Matkoihin käytetyn ajan yhteiskesto
+     *
+     */
     public double getMatkojenkesto() {
         if (matkat.size() == 0) {
             return 0.0;

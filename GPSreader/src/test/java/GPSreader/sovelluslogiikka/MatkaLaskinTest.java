@@ -29,9 +29,9 @@ public class MatkaLaskinTest {
 
     @Before
     public void setUp() {
-        ml=new MatkaLaskin();
-        m = lukija.lue("testimatkat\\20150118162507.txt");
-        m2= tlukija.lue("testimatkat\\2015_1_18_14.txt");
+        ml = new MatkaLaskin();
+        m = lukija.lue("testimatkat/20150118162507.txt");
+        m2 = tlukija.lueTallennettuTiedosto("testimatkat/2015_1_18_14.txt");
     }
 
     @Test
@@ -45,24 +45,24 @@ public class MatkaLaskinTest {
         double kesto = ml.laskeMatkanKesto(m2.getAikaleima());
         assertNotNull(kesto);
     }
-    
+
     @Test
-    public void LaskekestoToimii(){
-        assertTrue(m.getKesto()>0);
+    public void LaskekestoToimii() {
+        assertTrue(m.getKesto() > 0);
     }
-    
-     @Test
-    public void LaskeNopeusToimiiOikein(){
-       
-        double etaisyys = ml.laskeEtaisyys(m2.getLatitudi().get(0), m2.getLongitudi().get(0), m2.getLatitudi().get(1),m2.getLongitudi().get(1));
+
+    @Test
+    public void LaskeNopeusToimiiOikein() {
+
+        double etaisyys = ml.laskeEtaisyys(m2.getLatitudi().get(0), m2.getLongitudi().get(0), m2.getLatitudi().get(1), m2.getLongitudi().get(1));
         double nopeus = ml.laskeNopeus(m2.getAikaleima().get(0), m2.getAikaleima().get(1), etaisyys);
-         ;
-        nopeus = Math.round(nopeus*100.0)/100.0;
+        ;
+        nopeus = Math.round(nopeus * 100.0) / 100.0;
         String vertaus = String.valueOf(nopeus);
         assertEquals("6.25", vertaus);
     }
-    
-    public void laskeMatkanKestoPalauttaaNollajosNull(){
+
+    public void laskeMatkanKestoPalauttaaNollajosNull() {
         double kesto = ml.laskeMatkanKesto(null);
         assertEquals(0.0, kesto);
     }

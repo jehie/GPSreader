@@ -8,59 +8,33 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import GPSreader.sovelluslogiikka.Matka;
+import GPSreader.sovelluslogiikka.Muuntaja;
+import GPSreader.sovelluslogiikka.Validoija;
 import java.sql.Time;
 import java.util.Date;
-import kayttoliittyma.Ilmoittaja;
+import GPSreader.kayttoliittyma.Ilmoittaja;
 
 /**
  * Lukee GPS Logger -android sovelluksesta saatavan tekstimuotoisen GPS-mittaus
- * tiedoston.
+ * tiedoston ja muuntaa sen Matka-olioksi.
  *
  */
 public class TXTRaakaLukija {
 
     Ilmoittaja ilmoittaja = new Ilmoittaja();
+    Validoija validoija = new Validoija();
+    Muuntaja muuntaja = new Muuntaja();
     BufferedReader bufferoitulukija;
     String erotin = ",";
 
-    public boolean tarkistaErotin(String rivi) {
-        if (rivi.contains(",") && rivi.contains(".") && !rivi.contains("@") && !rivi.contains("€")) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean tarkistaHeader(String rivi) {
-
-        if (rivi.equals("time,lat,lon,elevation,accuracy,bearing,speed")) {
-            return true;
-        }
-        return false;
-    }
-
-    //Muuttaa String-muotoisen tekstin Date-olioksi
-    public Date stringToTime(String time) {
-        String vuosi = time.substring(0, 4);
-        String kuukausi = time.substring(5, 7);
-        String paiva = time.substring(8, 10);
-        String tunnit = time.substring(11, 13);
-        String minuutit = time.substring(14, 16);
-        String sekuntit = time.substring(17, 19);
-
-        Date date = new Date();
-        date.setYear(Integer.parseInt(vuosi));
-        date.setMonth(Integer.parseInt(kuukausi));
-        date.setDate(Integer.parseInt(paiva));
-        date.setHours(Integer.parseInt(tunnit));
-        date.setMinutes(Integer.parseInt(minuutit));
-        date.setSeconds(Integer.parseInt(sekuntit));
-
-        return date;
-
-    }
-
-    //Lukee tiedoston sisään ja luo Matka olion ja palauttaa sen
+    /**
+     * Lukee annetun tiedoston sisään, tarkistaa sen oikeellisuuden ja parsii
+     * siitä Matka-olion. Metodi lukee rivi kerrallaan tiedoston sisään.
+     *
+     * @param tiedostopolku Tiedostopolku josta luettava tiedosto löytyy
+     * @return Tiedostosta muodostettu Matka-olio
+     *
+     */
     public Matka lue(String tiedostopolku) {
 
         ArrayList<Double> lat = new ArrayList<Double>();
@@ -72,27 +46,27 @@ public class TXTRaakaLukija {
             bufferoitulukija = new BufferedReader(new FileReader(tiedostopolku));
 
             String rivi = bufferoitulukija.readLine();
-            boolean headerok = tarkistaHeader(rivi);
+            boolean headerok = validoija.tarkistaHeaderRaakaMatkalta(rivi);
             if (!headerok) {
                 return null;
             }
 
             rivi = bufferoitulukija.readLine();
 
-            boolean erotinok = tarkistaErotin(rivi);
-            if (!erotinok) {
-                return null;
-            }
-
             while (rivi != null) {
 
+                if (!validoija.tarkistaErotin(rivi) || !validoija.RaakaMatkanRiviSisaltaaOikeatMerkit(rivi)) {
+                    return null;
+                }
+
                 String[] rivitaulukko = rivi.split(erotin);
+ 
                 Double latitudi = Double.parseDouble(rivitaulukko[1]);
-                lat.add(latitudi);
                 Double longitudi = Double.parseDouble(rivitaulukko[2]);
+                lat.add(latitudi);
                 lon.add(longitudi);
 
-                time.add(stringToTime(rivitaulukko[0]));
+                time.add(muuntaja.stringToDate(rivitaulukko[0]));
                 Double acc = Double.parseDouble(rivitaulukko[4]);
                 accuracy.add(acc);
 

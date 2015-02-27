@@ -13,14 +13,16 @@ import GPSreader.sovelluslogiikka.Matka;
 public class TXTTallentaja {
 
     /**
-     * Kirjoittaa Matka-olion tekstitiedostoon, \Matkat kansioon. Tallennettu tiedosto luetaan TXTTAllennettuLukija-luokalla. 
+     * Kirjoittaa Matka-olion tekstitiedostoon haluttuun tallennuskansioon. Tallennettu tiedosto luetaan TXTTallennettuLukija-luokalla. 
      *
-     * @param Matka Matka-olio joka tallennetaan.
+     * @param talletettavaMatka Matka-olio joka tallennetaan.
+     * @param tallennuskansio Kansio johon tiedosto tallennetaan
+     * @return Onnistuiko matkan tallentaminen
      */
-    public boolean kirjoitaMatkaTiedostoon(Matka talletettavaMatka) {
+    public boolean kirjoitaMatkaTiedostoon(Matka talletettavaMatka, String tallennuskansio) {
         String nimi = talletettavaMatka.getMatkanNimi();
         try {
-            FileWriter kirjoittaja = new FileWriter("matkat/" + nimi + ".txt");
+            FileWriter kirjoittaja = new FileWriter(tallennuskansio +"/"+ nimi + ".txt");
             
             for (int i = 0; i < talletettavaMatka.getLatitudi().size(); i++) {
                 String lat = Double.toString(talletettavaMatka.getLatitudi().get(i));

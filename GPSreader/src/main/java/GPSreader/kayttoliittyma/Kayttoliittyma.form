@@ -68,26 +68,26 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jButton4" linkSize="3" min="-2" pref="95" max="-2" attributes="0"/>
+                      <Component id="muokkaaMatkaaJButton" linkSize="3" min="-2" pref="95" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton3" linkSize="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="PoistaMatkaJButton" linkSize="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="PoistaEpaTarkatButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="PoistaEpaTarkatJButton" alignment="0" max="32767" attributes="0"/>
+                  <Component id="AnnaTiedostoJButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton7" linkSize="1" min="-2" pref="124" max="-2" attributes="0"/>
-                          <Component id="jButton6" linkSize="1" max="32767" attributes="0"/>
+                          <Component id="MatkanLoppuJButton" linkSize="1" min="-2" pref="124" max="-2" attributes="0"/>
+                          <Component id="MatkanAlkuJButton" linkSize="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="jButton5" max="32767" attributes="0"/>
+                      <Component id="NaytaKartallaJButton" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
-                  <Component id="jPanel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="kaikkienMatkojenTiedotJPanel" alignment="1" max="32767" attributes="0"/>
+                  <Component id="valitunMatkanTiedotJPanel" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -101,33 +101,30 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jButton6" linkSize="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="MatkanAlkuJButton" linkSize="2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton7" linkSize="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="MatkanLoppuJButton" linkSize="2" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jButton5" min="-2" pref="67" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="NaytaKartallaJButton" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jPanel3" min="-2" pref="66" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="kaikkienMatkojenTiedotJPanel" min="-2" pref="66" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane3" min="-2" pref="147" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jButton1" linkSize="6" min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="AnnaTiedostoJButton" linkSize="6" min="-2" pref="29" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="PoistaEpaTarkatButton" linkSize="6" min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="PoistaEpaTarkatJButton" linkSize="6" min="-2" pref="29" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton4" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton3" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="muokkaaMatkaaJButton" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="PoistaMatkaJButton" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jPanel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="valitunMatkanTiedotJPanel" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -135,20 +132,20 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="AnnaTiedostoJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Anna uusi tiedosto"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnnaTiedostoJButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="PoistaEpaTarkatButton">
+    <Component class="javax.swing.JButton" name="PoistaEpaTarkatJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Minimitarkkuus"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PoistaEpaTarkatButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PoistaEpaTarkatJButtonActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
@@ -158,7 +155,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="jList2">
+        <Component class="javax.swing.JList" name="matkatJList">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -170,22 +167,22 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jList2MouseClicked"/>
-            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="jList2ValueChanged"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="matkatJListMouseClicked"/>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="matkatJListValueChanged"/>
           </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="PoistaMatkaJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Poista"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PoistaMatkaJButtonActionPerformed"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JPanel" name="jPanel2">
+    <Container class="javax.swing.JPanel" name="valitunMatkanTiedotJPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -203,22 +200,22 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <Component id="matkanVuosiJLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="matkanPituusJLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="matkanKuukausiJLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="matkanKeskinopeusJlabel" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="matkanPaivaJlabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <Component id="matkanKestoJLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="92" max="32767" attributes="0"/>
@@ -229,54 +226,54 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="matkanKuukausiJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="matkanPaivaJlabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="matkanVuosiJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="matkanPituusJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="matkanKestoJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="matkanKeskinopeusJlabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="matkanKuukausiJLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Kuukausi:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="matkanPaivaJlabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="P&#xe4;iv&#xe4;: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="matkanKestoJLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Kesto: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="matkanPituusJLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pituus:          "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel7">
+        <Component class="javax.swing.JLabel" name="matkanVuosiJLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Vuosi:       "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="matkanKeskinopeusJlabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Keskinopeus: "/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="muokkaaMatkaaJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Muokkaa"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -285,34 +282,34 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="muokkaaMatkaaJButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton5">
+    <Component class="javax.swing.JButton" name="NaytaKartallaJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="N&#xe4;yt&#xe4; kartalla"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NaytaKartallaJButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton6">
+    <Component class="javax.swing.JButton" name="MatkanAlkuJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alku"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MatkanAlkuJButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton7">
+    <Component class="javax.swing.JButton" name="MatkanLoppuJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Loppu"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MatkanLoppuJButtonActionPerformed"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JPanel" name="jPanel3">
+    <Container class="javax.swing.JPanel" name="kaikkienMatkojenTiedotJPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -332,11 +329,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                  <Component id="matkojenPituusJLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                  <Component id="matkojenKeskinopeusJLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                  <Component id="matkojenKestoJLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -345,9 +342,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="matkojenPituusJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="matkojenKeskinopeusJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="matkojenKestoJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="17" max="32767" attributes="0"/>
               </Group>
@@ -355,17 +352,17 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel11">
+        <Component class="javax.swing.JLabel" name="matkojenKestoJLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Kesto: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel12">
+        <Component class="javax.swing.JLabel" name="matkojenPituusJLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pituus:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel14">
+        <Component class="javax.swing.JLabel" name="matkojenKeskinopeusJLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Keskinopeus: "/>
           </Properties>

@@ -21,18 +21,17 @@ public class TXTTallentajaTest {
     @Before
     public void setUp() {
         TXTRaakaLukija luk = new TXTRaakaLukija();
-        m = luk.lue("20150118162507.txt");
+        m = luk.lue("testimatkat/20150118162507.txt");
     }
     
     @Test
     public void TallentajaPalauttaaTrueKunTiedostoKirjoitettu(){
         TXTTallentaja tal = new TXTTallentaja();
-        boolean onnistuiko =  tal.kirjoitaMatkaTiedostoon(m);
+        boolean onnistuiko =  tal.kirjoitaMatkaTiedostoon(m, "testimatkat/");
         
         
-        File testitiedosto = new File("C:\\Users\\Jesse\\Documents\\Javalabra\\GPSreader\\GPSreader\\matkat\\2014_1_18_14.txt");
+        File testitiedosto = new File("matkat/2014_1_18_14.txt");
         testitiedosto.delete();
-        
         
         assertTrue(onnistuiko);
         

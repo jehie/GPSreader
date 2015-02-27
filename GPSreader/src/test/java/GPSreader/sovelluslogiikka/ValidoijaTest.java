@@ -58,32 +58,59 @@ public class ValidoijaTest {
         assertTrue(!validoija.validoiZOOM(0));
         assertTrue(!validoija.validoiZOOM(1255255));
     }
-    
+
     @Test
-    public void validoiLongitudiJaLatitudiToimiiKunnollisellaArvoilla(){
+    public void validoiLongitudiJaLatitudiToimiiKunnollisellaArvoilla() {
         assertTrue(validoija.validoiLongitudiJaLatitudi(12, 12));
         assertTrue(validoija.validoiLongitudiJaLatitudi(0, 0));
         assertTrue(validoija.validoiLongitudiJaLatitudi(90, 180));
         assertTrue(validoija.validoiLongitudiJaLatitudi(-90, -180));
-         assertTrue(validoija.validoiLongitudiJaLatitudi(-90, 0));
+        assertTrue(validoija.validoiLongitudiJaLatitudi(-90, 0));
     }
-    
-        @Test
-    public void validoiLongitudiJaLatitudiToimiiViallisillaArvoilla(){
+
+    @Test
+    public void validoiLongitudiJaLatitudiToimiiViallisillaArvoilla() {
         assertTrue(!validoija.validoiLongitudiJaLatitudi(122, 122));
         assertTrue(!validoija.validoiLongitudiJaLatitudi(123, -25888));
         assertTrue(!validoija.validoiLongitudiJaLatitudi(902112, 18000));
         assertTrue(!validoija.validoiLongitudiJaLatitudi(-90, -1800));
-         assertTrue(!validoija.validoiLongitudiJaLatitudi(-9, 500));
+        assertTrue(!validoija.validoiLongitudiJaLatitudi(-9, 500));
     }
-    
+
     @Test
-    public void validoiInputinToimii(){
+    public void validoiInputinToimii() {
         assertTrue(!validoija.validoiOnkoInputInteger("asdasda"));
         assertTrue(!validoija.validoiOnkoInputInteger("124312412asdasd"));
         assertTrue(validoija.validoiOnkoInputInteger("12431241"));
         assertTrue(validoija.validoiOnkoInputInteger("55512"));
         assertTrue(validoija.validoiOnkoInputInteger("-1"));
     }
+
+    @Test
+    public void TallennetunMatkanRiviSisaltaaOikeatMerkitToimii() {
+        assertTrue(validoija.TallennetunMatkanRiviSisaltaaOikeatMerkit("60.224515,25.021293,61382406308468,6.0") == true);
+        assertTrue(validoija.TallennetunMatkanRiviSisaltaaOikeatMerkit("60.224515,25.021293,61382406asdasd308468,6.0") == false);
+        assertTrue(validoija.TallennetunMatkanRiviSisaltaaOikeatMerkit("60.224515[][][]XASD,25.021293,61382406asdasd308468,6.0") == false);
+        assertTrue(validoija.TallennetunMatkanRiviSisaltaaOikeatMerkit("asdASDASDX") == false);
+        assertTrue(validoija.TallennetunMatkanRiviSisaltaaOikeatMerkit("123123123") == false);
+        assertTrue(validoija.TallennetunMatkanRiviSisaltaaOikeatMerkit(".........") == false);
+        assertTrue(validoija.TallennetunMatkanRiviSisaltaaOikeatMerkit("60.224515,25.021293,,,61382406308468,6.0") == false);
+
+    }
+
+    @Test
+    public void RaakaMatkanRiviSisaltaaOikeatMerkitToimii() {
+        
+        assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit("2014-01-18T15:02:07Z,60.228310,25.022108,110.800003,19.000000,298.100006,0.707107") == true);
+        assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit("2014-01-18T15:02:07Z,60.228310,25.022108,110.800003,,,19.000000,298.100006,0.707107") == false);
+        assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit("60.224515,25.021293,61382406308468,6.0") == false);
+        assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit("60.224515,25.021293,61382406asdasd308468,6.0") == false);
+        assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit("60.224515[][][]XASD,25.021293,61382406asdasd308468,6.0") == false);
+        assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit("asdASDASDX") == false);
+        assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit("123123123") == false);
+        assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit(".........") == false);
+        assertTrue(validoija.RaakaMatkanRiviSisaltaaOikeatMerkit("60.224515,25.021293,,,61382406308468,6.0") == false);
+    }
+    
 
 }

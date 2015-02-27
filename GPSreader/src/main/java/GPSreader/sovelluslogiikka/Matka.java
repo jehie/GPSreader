@@ -5,24 +5,24 @@ import java.util.Date;
 
 /**
  * Luokka sisältää kaikki yhteen Matkaan liittyvät muuttujat ja metodit Matkan
- * ominaisuuksien laskemiseen.
+ * ominaisuuksien laskemiseen. Matkan listatyyppisiä muuttujia ovat:
+ * koordinaatit (Latiduti ja Longitudit), aikaleimat sekä mittauksientarkkuudet.
+ * Muita muuttujia ovat nimi, vuosi, kuukausi, päivä, kesto, nopeus ja
+ * kuljettumatka.
  */
 public class Matka {
 
     //Matkaan GPS-mittaukset
-
     private ArrayList<Double> latitudit;
     private ArrayList<Double> longitudit;
     private ArrayList<Date> aikaleimat;
     private ArrayList<Double> mittauksientarkkuudet;
-
 
     //Lasketut muuttujat
     private String matkannimi;
     private String vuosi;
     private String kuukausi;
     private String paiva;
-    private String kommentti;
 
     private Double kuljettumatka;
     private double kesto;
@@ -38,8 +38,8 @@ public class Matka {
      * @param longitudi Jokaisen mittauksen longitudit listana
      * @param aikaleima Jokaisen mittauksen aikaleimat listana
      * @param tarkkuus GPS:n mittaustarkkuus listana
+     * @see laskeMatkanNimi();
      *
-     * 
      */
     public Matka(ArrayList<Double> latitudi, ArrayList<Double> longitudi,
             ArrayList<Date> aikaleima, ArrayList<Double> tarkkuus) {
@@ -51,8 +51,7 @@ public class Matka {
 
         this.vuosi = String.valueOf(aikaleima.get(0).getYear());
         this.kuukausi = String.valueOf(aikaleima.get(0).getMonth());
-        this.paiva = String.valueOf(aikaleima.get(0).getDay());
-        this.kommentti = "";
+        this.paiva = String.valueOf(aikaleima.get(0).getDate());
 
         this.kesto = 0.0;
         this.keskinopeus = 0.0;
@@ -61,8 +60,8 @@ public class Matka {
 
     }
 
-     /**
-     * Muodostaa matkalle nimen aikaleiman perusteella.
+    /**
+     * Muodostaa matkalle nimen aikaleiman ensimmäisen merkinnän perusteella.
      *
      */
     public void laskeMatkanNimi() {
@@ -72,25 +71,25 @@ public class Matka {
                                 + String.valueOf(aikaleimat.get(0).getHours())));
 
     }
-    
+
     /**
      * Muuttaa matkan aikaleimat-muuttujan aikoja ja laskee nimen uudelleen
-     * 
+     *
      * @param vuosi uusivuosi
      * @param kuukausi uusikuukausi
      * @param paiva uusipaiva
+     * @see laskeMatkanNimi();
      *
      */
-
     public void muutaAika(String vuosi, String kuukausi, String paiva) {
-        this.aikaleimat = matkalaskin.muutaVuosi(vuosi, kuukausi, paiva, aikaleimat);
+        this.aikaleimat = matkalaskin.muutaAika(vuosi, kuukausi, paiva, aikaleimat);
         laskeMatkanNimi();
     }
 
-    
-     /**
+    /**
      * Laskee kuljetun matkan, hyödynten MatkaLaskin-luokkaa.
-     * 
+     *
+     * @see MatkaLaskin.laskeEtaisyys()
      *
      */
     private void laskeKuljettuMatka() {
@@ -103,12 +102,12 @@ public class Matka {
         }
 
     }
-    
-    
-     /**
-     * Poistaa mittaukset joiden tarkkuus on huonompi kuin käyttäjän määrittelemä minimitarkkuus
-     * 
-     *@param tarkkuus tarkkuus jota suuremmat poistetaan
+
+    /**
+     * Poistaa mittaukset joiden tarkkuus on huonompi kuin käyttäjän
+     * määrittelemä minimitarkkuus
+     *
+     * @param tarkkuus tarkkuus jota suuremmat poistetaan
      */
     public void poistaEpaTarkatMittaukset(int tarkkuus) {
         for (int i = latitudit.size() - 1; i >= 0; i--) {
@@ -122,11 +121,21 @@ public class Matka {
         }
     }
 
+    /**
+     * Palauttaa kuljetun matkan. Laskee sen käyttäen laskeKuljettuMatka-metodia
+     *
+     * @return Matkan aikana kuljettumatka kilometreinä
+     */
     public Double getKuljettumatka() {
         laskeKuljettuMatka();
         return kuljettumatka;
     }
 
+    /**
+     * Palauttaa matkan keston. Laskee käyttäen MatkaLaskin luokan laskeMatkanKesto-metodia.
+     *@see matkalaskin.laskeMatkanKesto(aikaleimat)
+     * @return Matkan aika tunteina
+     */
     public double getKesto() {
         kesto = matkalaskin.laskeMatkanKesto(aikaleimat);
         return kesto;
@@ -154,14 +163,6 @@ public class Matka {
 
     public ArrayList<Double> getMittauksentarkkuus() {
         return mittauksientarkkuudet;
-    }
-
-    public String getKommentti() {
-        return kommentti;
-    }
-
-    public void setKommentti(String kommentti) {
-        this.kommentti = kommentti;
     }
 
     public String getVuosi() {

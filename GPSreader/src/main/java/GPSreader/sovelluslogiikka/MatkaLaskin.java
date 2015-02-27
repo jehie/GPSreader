@@ -5,11 +5,22 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Luokka johon tulee kaikki tarpeellinen laskenta mitä Matka-luokalle tehdään
+ * Luokka jolla lasketaan Matka-oliohin liittyviä muuttujia sekä muutetaan
+ * Matka-olion arvoja.
  */
 public class MatkaLaskin {
 
-    public ArrayList<Date> muutaVuosi(String vuosi, String kuukausi, String paiva, ArrayList<Date> aikaleimat) {
+    /**
+     * Muuttaa Matka-olion aikaleimojen tietoja. Metodilla voidaan muuttaa
+     * vuosi, kuukausi ja päivä
+     *
+     * @param vuosi Käyttäjän valitsema uusi Vuosi
+     * @param kuukausi Käyttäjän valitsema uusi Kuukausi
+     * @param paiva Käyttäjän valitsema uusi Päivä
+     * @param aikaleimat Matka-olion aikaleimat listana
+     * @return Palauttaa muokatun listan aikaleimoista
+     */
+    public ArrayList<Date> muutaAika(String vuosi, String kuukausi, String paiva, ArrayList<Date> aikaleimat) {
 
         for (Date a : aikaleimat) {
             a.setYear(Integer.valueOf(vuosi));
@@ -29,6 +40,7 @@ public class MatkaLaskin {
      * @param alkuLon ensimmäisen koordinaatin Longitudi
      * @param kohdeLat toisen koordinaatin Latitudi
      * @param kohdeLon toisen koordinaatin Longitudi
+     * @return Kahden koordinaattien välinen etäisyys kilometreissä
      */
     public double laskeEtaisyys(double alkuLat, double alkuLon,
             double kohdeLat, double kohdeLon) {
@@ -42,15 +54,15 @@ public class MatkaLaskin {
                 * Math.sin(lonEtaisyys / 2) * Math.sin(lonEtaisyys / 2);
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        //palautus kilometreinä
+
         return (maanHalkaisija * c);
     }
 
     /**
-     * Laskee kuinka kauan yksi matka kestää
+     * Laskee yhden matkan keston tunteina.
      *
-     * @param aikaleimat lista joka sisältää aikaleimat
-     *
+     * @param aikaleimat Lista joka sisältää aikaleimat
+     * @return Matkan kesto tunteina
      */
     public double laskeMatkanKesto(ArrayList<Date> aikaleimat) {
         if (aikaleimat == null) {
@@ -65,20 +77,19 @@ public class MatkaLaskin {
         return aika;
     }
 
-
     /**
-     * Laskee mikä oli kahden edellisen mittauksen nopeus
+     * Laskee mikä oli kahden edellisen mittauksen välinen nopeus
      *
      * @param aika1 ensimmäisen mittaus
      * @param aika2 toinen mittaus
      * @param matka kuljettu matka
+     * @return kahden mittauksen välinen nopeus tunteina
      *
      */
     public double laskeNopeus(Date aika1, Date aika2, double matka) {
         double erotus = aika2.getTime() - aika1.getTime();
         erotus = erotus / 1000 / 60 / 60;
 
-        System.out.println("Nopeus on: " + matka / erotus + "km/min");
         return matka / erotus;
     }
 

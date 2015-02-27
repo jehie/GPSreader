@@ -8,13 +8,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 
-
 public class MatkaTest {
-    
+
     public MatkaTest() {
     }
-    
-       TXTRaakaLukija lukija = new TXTRaakaLukija();
+
+    TXTRaakaLukija lukija = new TXTRaakaLukija();
     Matka m;
 
     @BeforeClass
@@ -36,8 +35,6 @@ public class MatkaTest {
     public void tearDown() {
     }
 
-
-
     @Test
     public void PoistaEpatarkatMittauksetToimii() {
         int mittauksiaEnnenPoistoa = m.getLatitudi().size();
@@ -51,6 +48,17 @@ public class MatkaTest {
     }
 
     @Test
+    public void PoistaEpatarkatMittauksetEiPoistaJosTarkkuusParempi() {
+        int mittauksiaEnnenPoistoa = m.getLatitudi().size();
+
+        m.poistaEpaTarkatMittaukset(10000);
+
+        int mittauksiaPoistonJalkeen = m.getLatitudi().size();
+
+        assertTrue(mittauksiaEnnenPoistoa == mittauksiaPoistonJalkeen);
+    }
+
+    @Test
     public void matkaLasketaanUudelleenMittaustenPoistonJalkeen() {
         double matkaAluksi = m.getKuljettumatka();
         m.poistaEpaTarkatMittaukset(10);
@@ -58,33 +66,52 @@ public class MatkaTest {
 
         assertTrue(matkaAluksi > matkaLopuksi);
     }
+
     @Test
-    public void muutaMatkanAikaaToimii(){
-       int vuosi =  m.getAikaleima().get(0).getYear();
-       m.muutaAika("2004", "1", "25");
+    public void muutaMatkanAikaaToimii() {
+        int vuosi = m.getAikaleima().get(0).getYear();
+        m.muutaAika("2004", "1", "25");
         int vuosi_muutettu = m.getAikaleima().get(0).getYear();
-        
-        assertTrue(vuosi_muutettu<vuosi);
+
+        assertTrue(vuosi_muutettu < vuosi);
     }
-    
+
     @Test
-    public void laskeMatkanNimiToimii(){
+    public void laskeMatkanNimiToimii() {
         String nimi = m.getMatkanNimi();
-        m.muutaAika("2012","1","12");
+        m.muutaAika("2012", "1", "12");
         m.laskeMatkanNimi();
         String uusinimi = m.getMatkanNimi();
-        
+
         assertFalse(nimi.equals(uusinimi));
- 
+
     }
-    
+
     @Test
-    public void getKeskiNopeusToimii(){
+    public void getKeskiNopeusToimii() {
         double kn = m.getKeskinopeus();
-        
-        assertTrue(kn>3.0);
-        
-        
+
+        assertTrue(kn > 3.0);
+
     }
-    
+
+    @Test
+    public void getKuljettuMatkaToimii() {
+        double kuljettumatka = m.getKuljettumatka();
+        assertTrue(kuljettumatka < 8 || kuljettumatka > 7.5);
+
+    }
+
+    @Test
+    public void setKuukausiToimii() {
+        m.setKuukausi("10");
+        assertTrue("10" == m.getKuukausi());
+    }
+
+    @Test
+    public void setPaivaToimii() {
+        m.setPaiva("10");
+        assertTrue("10" == m.getPaiva());
+    }
+
 }

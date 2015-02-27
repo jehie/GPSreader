@@ -2,6 +2,7 @@ package GPSreader.tiedostonlukija;
 
 import GPSreader.sovelluslogiikka.Matka;
 import GPSreader.sovelluslogiikka.MatkaKokoelma;
+import GPSreader.sovelluslogiikka.Validoija;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,30 +12,48 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import kayttoliittyma.Ilmoittaja;
+import GPSreader.kayttoliittyma.Ilmoittaja;
 
 /**
  * Lukee ohjelman avulla tallennetun tiedoston sisään ohjelmaan uudelleen.
  *
  */
 public class TXTTallennettuLukija {
-    Ilmoittaja ilmoittaja = new Ilmoittaja();
-    File kansio = new File("matkat/");
 
-    //Lukee kaikki kansiossa olevat TXTTallentajalla tallennetut tiedostot
-    public MatkaKokoelma lueKaikkiTallennetutTiedostot() {
+    Ilmoittaja ilmoittaja = new Ilmoittaja();
+    Validoija validoija = new Validoija();
+
+    /**
+     * Lukee kaikki kansiossa olevat TXTTallentajalla tallennetut tiedostot.
+     *
+     * @param tallennuskansio Kansio josta matkoja yritetään lukea
+     *
+     */
+    public MatkaKokoelma lueKaikkiTallennetutTiedostot(String tallennuskansio) {
+        File kansio = new File(tallennuskansio);
         MatkaKokoelma mko = new MatkaKokoelma();
-        for (File fileEntry : kansio.listFiles()) {
-            System.out.println(fileEntry.getName());
-            Matka m = lue(kansio + "/" + fileEntry.getName());
-            mko.lisaaMatka(m);
+        for (File tiedosto : kansio.listFiles()) {
+
+            if (tiedosto.isFile() && tiedosto.getName().endsWith(".txt")) {
+                Matka m = lueTallennettuTiedosto(kansio + "/" + tiedosto.getName());
+                if (m != null) {
+                    mko.lisaaMatka(m);
+                }
+
+            }
+
         }
-        System.out.println("");
         return mko;
     }
 
-    //Lukee jo ohjelmalla tallennetun tekstimuotoisen tiedoston sisään ja luo Matka olion ja palauttaa sen
-    public Matka lue(String tiedostopolku) {
+    /**
+     * Lukee jo ohjelmalla tallennetun tekstimuotoisen tiedoston sisään ja luo
+     * Matka olion ja palauttaa sen.
+     *
+     * @param tiedostopolku Tiedostopolku josta tiedostoa yritetään lukea
+     *
+     */
+    public Matka lueTallennettuTiedosto(String tiedostopolku) {
 
         ArrayList<Double> lat = new ArrayList<Double>();
         ArrayList<Double> lon = new ArrayList<Double>();
@@ -47,12 +66,16 @@ public class TXTTallennettuLukija {
             String rivi = bufferoitulukija.readLine();
 
             while (rivi != null) {
+                if (!validoija.tarkistaErotin(rivi) || !validoija.TallennetunMatkanRiviSisaltaaOikeatMerkit(rivi)) {
+                    return null;
+                }
 
                 String[] rivitaulukko = rivi.split(",");
 
                 Double latitudi = Double.parseDouble(rivitaulukko[0]);
-                lat.add(latitudi);
                 Double longitudi = Double.parseDouble(rivitaulukko[1]);
+
+                lat.add(latitudi);
                 lon.add(longitudi);
                 Date lisattavaAika = new Date();
                 String aika = rivitaulukko[2];
@@ -65,7 +88,7 @@ public class TXTTallennettuLukija {
 
                 rivi = bufferoitulukija.readLine();
             }
-
+            bufferoitulukija.close();
         } catch (FileNotFoundException exp) {
             ilmoittaja.ilmoita("Tiedostoa ei löydy");
 

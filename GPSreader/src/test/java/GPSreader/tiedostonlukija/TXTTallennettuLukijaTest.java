@@ -21,7 +21,7 @@ public class TXTTallennettuLukijaTest {
     @Test
     public void TiedostoLuetaanOikeinSisaanOlemassaOlevallaTiedostolla() {
 
-        Matka m = tl.lue("testimatkat\\2015_1_18_14.txt");
+        Matka m = tl.lueTallennettuTiedosto("testimatkat\\2015_1_18_14.txt");
         assertNotNull(m);
 
     }
@@ -29,7 +29,7 @@ public class TXTTallennettuLukijaTest {
     @Test
     public void LuettuTiedostoSisältääRiveja() {
 
-        Matka m = tl.lue("testimatkat\\2015_1_18_14.txt");
+        Matka m = tl.lueTallennettuTiedosto("testimatkat\\2015_1_18_14.txt");
         assertTrue(m.getAikaleima().size()>5);
         
     }
