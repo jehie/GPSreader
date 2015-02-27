@@ -35,11 +35,8 @@ public class MatkaLaskin {
             int paivaInt = Integer.valueOf(paiva);
 
             boolean vuosiOnJarkeva = validoija.tarkistaOnkoVuosiJarkeva(vuosiInt);
-            System.out.println(vuosiOnJarkeva);
             boolean paivaOnJarkeva = validoija.tarkistaOnkoPaivaJarkeva(paivaInt);
-            System.out.println(paivaOnJarkeva);
             boolean kuukausiOnJarkeva = validoija.tarkistaOnkoKuukausiJarkeva(kuukausiInt);
-            System.out.println(kuukausiOnJarkeva);
 
             if (vuosiOnJarkeva && paivaOnJarkeva && kuukausiOnJarkeva) {
                 for (Date a : aikaleimat) {
@@ -52,7 +49,7 @@ public class MatkaLaskin {
             }
 
         }
-        
+
         return aikaleimat;
 
     }

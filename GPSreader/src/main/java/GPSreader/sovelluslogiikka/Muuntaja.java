@@ -51,8 +51,8 @@ public class Muuntaja {
         }
 
     }
-    
-        /**
+
+    /**
      * Muodostaa annetusta String-muotoisesta aikaleimasta Date-olion.
      *
      * @param aikaleima Muutettava aikaleima
@@ -74,7 +74,6 @@ public class Muuntaja {
         date.setHours(Integer.parseInt(tunnit));
         date.setMinutes(Integer.parseInt(minuutit));
         date.setSeconds(Integer.parseInt(sekuntit));
-        System.out.println(date.getDate());
         return date;
 
     }

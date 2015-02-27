@@ -21,8 +21,7 @@ public class GoogleMapsOsoitteenRakentajaTest {
     public void osoitteenRakentajaMuodostaaOsoitteenOikein() {
         String oikeaOsoite = "https://maps.googleapis.com/maps/api/staticmap?center=12.1,13.3&maptype=terrain&zoom=12&size=600x600&key=AIzaSyDqqBJ4sBUY34znGoJA9IXQ3e-n4iEKzuU";
         String osoite = gmor.rakennaOsoite(12.1, 13.3, "terrain", 12);
-        System.out.println(oikeaOsoite);
-        System.out.println(osoite);
+
         assertEquals(oikeaOsoite, osoite);
     }
 
@@ -30,8 +29,7 @@ public class GoogleMapsOsoitteenRakentajaTest {
     public void osoitteenRakentajaMarkereillaMuodostaaOsoitteenOikein() {
         String oikeaOsoite = "https://maps.googleapis.com/maps/api/staticmap?center=12.1,13.3&maptype=terrain&zoom=12&size=600x600&markers=color:blue%7Clabel:A%7C12.1,13.3&key=AIzaSyDqqBJ4sBUY34znGoJA9IXQ3e-n4iEKzuU";
         String osoite = gmor.rakennaOsoiteMarkereilla(12.1, 13.3, "terrain", 12);
-        System.out.println(oikeaOsoite);
-        System.out.println(osoite);
+
         assertEquals(oikeaOsoite, osoite);
     }
 

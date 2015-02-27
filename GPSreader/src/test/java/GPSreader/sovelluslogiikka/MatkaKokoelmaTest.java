@@ -23,7 +23,6 @@ public class MatkaKokoelmaTest {
 
         mk.lisaaMatka(txtl.lueTallennettuTiedosto("testimatkat/kokoelmatesti/2015_1_18_14.txt"));
         mk.lisaaMatka(txtl.lueTallennettuTiedosto("testimatkat/kokoelmatesti/2015_1_19_10.txt"));
-        System.out.println("Matkojen summa on : " +mk.getMatkat().size());
     }
 
     @Test

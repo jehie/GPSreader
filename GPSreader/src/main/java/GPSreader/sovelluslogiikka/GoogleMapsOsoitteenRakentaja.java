@@ -62,8 +62,8 @@ public class GoogleMapsOsoitteenRakentaja {
      * näytetään viivana. Reitissä näytetään joka viidennet koordinaatit.
      * Muodostettavalla osoitteella on maksimikoko, joten koordinaattien
      * karsiminen on pakollista. Lyhyillä matkoilla tämä voi aiheuttaa
-     * "oikaisua" kartalla. Metodi palauttaa virheen jos koordinatit tai kuvatyyppi eivät ole
-     * järkeviä.
+     * "oikaisua" kartalla. Metodi palauttaa virheen jos koordinatit tai
+     * kuvatyyppi eivät ole järkeviä.
      *
      * @param latitudit Reitin latitudi-koordinaatit
      * @param longitudit Reitin longitudi-koordinaatit
@@ -75,7 +75,7 @@ public class GoogleMapsOsoitteenRakentaja {
         boolean onkoKoordinaatitOK = true;
         String reitti = "&path=color:0x0000ff|weight:7";
         int monesko = 0;
-        
+
         if (!validoija.validoiKuvatyyppi(kuvatyyppi)) {
             return "virhe";
         }

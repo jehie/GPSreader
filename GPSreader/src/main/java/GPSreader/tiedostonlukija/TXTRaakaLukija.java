@@ -60,7 +60,7 @@ public class TXTRaakaLukija {
                 }
 
                 String[] rivitaulukko = rivi.split(erotin);
- 
+
                 Double latitudi = Double.parseDouble(rivitaulukko[1]);
                 Double longitudi = Double.parseDouble(rivitaulukko[2]);
                 lat.add(latitudi);
