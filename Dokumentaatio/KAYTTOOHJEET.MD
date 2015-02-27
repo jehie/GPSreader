@@ -5,7 +5,7 @@ Päänäkymästä löytyy useampia toimintoja. Vasemmalla ylhäällä on listatt
 
 Kaikkien matkojen tiedot kohdasta käyttäjä voi nähdä kaikkien ohjelmaan luettujen matkojen tiedot.
 
-Matkan tiedot kohdasta käyttäjä voi tarkastella yksittäisen matkojen tietoja, valitsemalla listalta aina yhden kerrallaan. Valittuaan matkan ohjelma päivittää tiedot Matkan tiedot-kohtaan. 
+#Matkan# tiedot kohdasta käyttäjä voi tarkastella yksittäisen matkojen tietoja, valitsemalla listalta aina yhden kerrallaan. Valittuaan matkan ohjelma päivittää tiedot Matkan tiedot-kohtaan. 
 
 Muokkaa-napilla käyttäjä voi vaihtaa valitun matkan vuoden, kuukauden tai päivän jos näin haluaa. Ohjelma poistaa vanhan matkan ja tallentaa uuden tilalle. Muutoksen voi vielä perua painamalla Muokkaa näppäintä uudelleen, jolloin ohjelma ehdottaa alkuperäisiä arvoja. 
 
