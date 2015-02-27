@@ -13,4 +13,5 @@ Alku-nappia painamalla käyttäjä näkee Google Maps-kartan ja merkinnän mistä ensi
 Loppu-nappia painamalla nähdään taas viimeisen mittauksen sijainti kartalla.
 Näytä kartalla nappi näyttää taas koko matkan reitin, käyttäen osaa mittauksista visualisointiin. Vain joka viides merkintä otetaan mukaan, jotta vältytään liian pitkältä pyynnöltä(maksimirajoitus). Lyhyillä matkoilla tämä voi johtaa ”oikaisuun” kartalla. 
 Ohjelma sulkeutuu X-napista oikeassa yläreunassa. 
-v
+
+Mallitiedostoja löytyy Dokumentaatio/MalliMatkat hakemistosta, joilla käyttäjä voi testata ohjelman toimintaa. 
